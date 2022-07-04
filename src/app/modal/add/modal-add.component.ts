@@ -107,7 +107,7 @@ export class ModalAddComponent implements OnInit {
       date: this.dataInicio
     };
 
-    const daysToAdd = [0,7,15,30].map(x => x + 1);
+    const daysToAdd = [0,7,15,30];
 
     this.subjectService.addInDays(subject, daysToAdd);
 

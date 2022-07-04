@@ -30,7 +30,7 @@ export class SubjectService {
 
   addInDays(subject: NewSubject, days: number[]): void {
     const subjects = days.map(d => {
-      const date = subject.date.addDays(d).clone();
+      const date = subject.date.clone().addDays(d);
       return {...subject, date};
     });
 

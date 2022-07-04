@@ -22,7 +22,6 @@
           <mat-form-field class="normalize-font input-container" appearance="outline">
             <mat-label>Frente</mat-label>
             <mat-select [(ngModel)]="subtopicId" [disabled]="subtopics.length === 0">
-              <mat-option [value]="">-- Selecione --</mat-option>
               <ng-container *ngFor="let st of subtopics">
                 <mat-option [value]="st.id">{{ st.name }}</mat-option>
               </ng-container>
@@ -41,7 +40,6 @@
           <mat-form-field class="normalize-font input-container" appearance="outline">
             <mat-label>Matéria</mat-label>
             <mat-select [(ngModel)]="materiaId" [disabled]="materias.length === 0">
-              <mat-option [value]="">-- Selecione --</mat-option>
               <ng-container *ngFor="let mt of materias">
                 <mat-option [value]="mt.id">{{ mt.name }}</mat-option>
               </ng-container>
