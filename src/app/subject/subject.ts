@@ -7,4 +7,8 @@ export interface NewSubject {
   date: Date;
 }
 
-export interface Subject extends IdentifiableContext, NewSubject {}
+export interface PreSubject extends NewSubject {
+  parentId: string;
+}
+
+export interface Subject extends IdentifiableContext, PreSubject {}

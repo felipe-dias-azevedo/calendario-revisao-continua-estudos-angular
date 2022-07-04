@@ -10,7 +10,7 @@ export class ContextStorageService <T extends IdentifiableContext, NT> {
   constructor() { }
 
   get(key: string): T[] {
-    const contentString = sessionStorage.getItem(key);
+    const contentString = localStorage.getItem(key);
 
     if (contentString === null) {
       return [];
@@ -27,22 +27,22 @@ export class ContextStorageService <T extends IdentifiableContext, NT> {
 
   add(key: string, content: NT): void {
     const newContent = { id: uuid(), ...content };
-    const contentString = sessionStorage.getItem(key);
+    const contentString = localStorage.getItem(key);
 
     if (contentString === null) {
       const jsonContent = JSON.stringify([newContent]);
-      sessionStorage.setItem(key, jsonContent);
+      localStorage.setItem(key, jsonContent);
       return;
     }
 
     const oldContent: T[] = JSON.parse(contentString);
     const contents = [...oldContent, newContent];
     const jsonContent = JSON.stringify(contents);
-    sessionStorage.setItem(key, jsonContent);
+    localStorage.setItem(key, jsonContent);
   }
 
   deleteById(key: string, id: string): void {
-    const contentString = sessionStorage.getItem(key);
+    const contentString = localStorage.getItem(key);
 
     if (contentString === null) {
       return;
@@ -51,10 +51,10 @@ export class ContextStorageService <T extends IdentifiableContext, NT> {
     let oldContent: T[] = JSON.parse(contentString);
     const contents = oldContent.filter(m => m.id !== id);
     const jsonContent = JSON.stringify(contents);
-    sessionStorage.setItem(key, jsonContent);
+    localStorage.setItem(key, jsonContent);
   }
 
   deleteAll(key: string): void {
-    sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
   }
 }

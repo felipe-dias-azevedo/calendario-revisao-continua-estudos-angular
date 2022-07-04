@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ContextStorageService} from "../shared/context-storage/context-storage.service";
-import {NewSubject, Subject} from "./subject";
+import {NewSubject, PreSubject, Subject} from "./subject";
+import {v4 as uuid} from "uuid";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class SubjectService {
   private key = 'subjects';
 
   constructor(
-    private contextStorageService: ContextStorageService<Subject, NewSubject>
+    private contextStorageService: ContextStorageService<Subject, PreSubject>
   ) { }
 
   get(): Subject[] {
@@ -24,14 +25,16 @@ export class SubjectService {
     return this.contextStorageService.getById(this.key, id);
   }
 
-  add(subject: NewSubject): void {
+  add(subject: PreSubject): void {
     this.contextStorageService.add(this.key, subject);
   }
 
   addInDays(subject: NewSubject, days: number[]): void {
-    const subjects = days.map(d => {
+    const parentId = uuid();
+
+    const subjects: PreSubject[] = days.map(d => {
       const date = subject.date.clone().addDays(d);
-      return {...subject, date};
+      return {...subject, date, parentId};
     });
 
     subjects.forEach(s => this.add(s));
@@ -39,6 +42,12 @@ export class SubjectService {
 
   deleteById(id: string): void {
     this.contextStorageService.deleteById(this.key, id);
+  }
+
+  deleteByParentId(parentId: string): void {
+    this.get()
+      .filter(s => s.parentId === parentId)
+      .forEach(s => this.deleteById(s.id));
   }
 
   deleteByName(name: string): void {

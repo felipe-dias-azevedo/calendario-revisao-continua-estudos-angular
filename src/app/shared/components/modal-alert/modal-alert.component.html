@@ -1,6 +1,9 @@
 
 <div class="modal-header">
-  <h2 class="force-font normalize-font">Confirmação de Remoção</h2>
+  <div class="flex title-alert">
+    <mat-icon color="warn" [inline]="true" class="alert-icon">warning</mat-icon>
+    <h4 class="force-font">Confirmação de Remoção</h4>
+  </div>
 
   <button
     mat-icon-button
@@ -11,12 +14,15 @@
 </div>
 
 <mat-dialog-content>
-  <p class="force-font normalize-font tab-label-top">
+  <div class="alert-icon-container">
+
+  </div>
+  <p class="force-font text-title tab-label-top">
     Você tem certeza em deletar {{ alertTypeContent.typeContent }}?
   </p>
-  <b class="force-font normalize-font">
+  <p class="force-font text-content">
     {{ alertTypeContent.nameContent }}
-  </b>
+  </p>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

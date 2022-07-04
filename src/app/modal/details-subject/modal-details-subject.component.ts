@@ -48,7 +48,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
   deleteSubject() {
     const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
       data: {
-        typeContent: 'esta Disciplina',
+        typeContent: 'a ocorrência da seguinte Disciplina',
         nameContent: this.subject.name
       }
     });
@@ -68,7 +68,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
   deleteAllSubjects() {
     const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
       data: {
-        typeContent: 'todas as Disciplinas com este nome',
+        typeContent: 'todas as ocorrências da seguinte Disciplina',
         nameContent: this.subject.name
       }
     });
@@ -77,7 +77,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
         return;
       }
 
-      this.subjectService.deleteByName(this.subject.name);
+      this.subjectService.deleteByParentId(this.subject.parentId);
 
       this.notifyService.show('Disciplinas deletadas com sucesso!');
 

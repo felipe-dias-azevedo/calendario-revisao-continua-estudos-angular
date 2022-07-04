@@ -1,0 +1,21 @@
+
+.title-alert {
+    align-items: flex-end;
+}
+
+.alert-icon {
+    margin-right: 1rem;
+    font-size: 2rem;
+}
+
+.text-title {
+    padding-top: 2rem;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.text-content {
+    padding-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}

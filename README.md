@@ -11,14 +11,15 @@ Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fon
 * App data in Browser's Local Storage
 
 ### TODO:
-* Deletar todas ocorrencias por ID pai (invés de nome)
-* Adicionar novas repetições para uma disciplina
-* Atualizar uma disciplina (somente uma e todas ocorrencias)
-* Formulario angular para validação na criação
-* Opções de repetição customizadas
-* Visualização em formato de calendário
-* Exportar dados
-* Importar dados
-* Dark theme
-* Testes unitários com Karma + Jasmine
-* Internacionalização com tradução para Inglês
+[*] Deletar todas ocorrencias por ID pai (invés de nome)
+[ ] Formulario angular para validação na criação
+[ ] Adicionar novas repetições para uma disciplina
+[ ] Opção de resetar todos os dados
+[ ] Atualizar uma disciplina (somente uma e todas ocorrencias)
+[ ] Opções de repetição customizadas
+[ ] Visualização em formato de calendário
+[ ] Exportar dados
+[ ] Importar dados
+[ ] Dark theme
+[ ] Testes unitários com Karma + Jasmine
+[ ] Internacionalização com tradução para Inglês
