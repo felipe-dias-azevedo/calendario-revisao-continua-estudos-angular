@@ -1,11 +1,12 @@
 <h3>{{ day }}</h3>
-<ng-container *ngFor="let materia of subjectsToday">
-  <div
-    class="subject"
+<mat-chip-list>
+  <mat-chip
+    class="force-font normalize-font subject"
+    *ngFor="let materia of subjectsToday"
     (click)="showDetailsModal(materia.subject.id)"
     [ngStyle]="{'background-color': materia.color, 'color': materia.textColor}"
     matTooltip="Obter detalhes desta disciplina"
   >
-    <p>{{ materia.subject.name }}</p>
-  </div>
-</ng-container>
+    {{ materia.subject.name }}
+  </mat-chip>
+</mat-chip-list>

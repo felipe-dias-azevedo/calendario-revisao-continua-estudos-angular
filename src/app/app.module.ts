@@ -24,6 +24,7 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatListModule} from "@angular/material/list";
 import { ModalAlertComponent } from './shared/components/modal/alert/modal-alert.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatSnackBarModule,
     MatListModule,
     MatTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatChipsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }

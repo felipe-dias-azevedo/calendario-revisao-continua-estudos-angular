@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {StudyDayContent} from "./studies-day-list";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalDetailsSubjectComponent} from "../modal/details-subject/modal-details-subject.component";
@@ -6,7 +6,8 @@ import {ModalDetailsSubjectComponent} from "../modal/details-subject/modal-detai
 @Component({
   selector: '[app-studies-day-list]',
   templateUrl: './studies-day-list.component.html',
-  styleUrls: ['./studies-day-list.component.css']
+  styleUrls: ['./studies-day-list.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class StudiesDayListComponent implements OnInit {
 
