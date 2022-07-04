@@ -18,19 +18,20 @@
   <mat-dialog-content>
     <mat-tab label="Disciplina">
       <ng-template matTabContent >
-        <div class="tab-content tab-label-top">
-          <mat-form-field class="normalize-font input-container" appearance="outline">
+        <form id="subjectForm" (ngSubmit)="saveSubject()" [formGroup]="formSubject" class="tab-content tab-label-top">
+          <mat-form-field class="normalize-font input-container" appearance="outline" hideRequiredMarker>
             <mat-label>Disciplina</mat-label>
             <input
               matInput
               placeholder="Nome da Disciplina"
-              [(ngModel)]="subjectName"
+              formControlName="subjectName"
             />
+            <mat-error *ngIf="formSubject.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
 
-          <mat-form-field class="normalize-font input-container" appearance="outline">
+          <mat-form-field class="normalize-font input-container" appearance="outline" hideRequiredMarker>
             <mat-label>Frente</mat-label>
-            <mat-select [(ngModel)]="subtopicId" [disabled]="subtopics.length === 0">
+            <mat-select formControlName="subtopicId" [disabled]="subtopics.length === 0">
               <ng-container *ngFor="let st of subtopics">
                 <mat-option [value]="st.id">{{ st.name }}</mat-option>
               </ng-container>
@@ -38,11 +39,12 @@
             <mat-hint *ngIf="subtopics.length === 0">
               Nenhuma frente inserida
             </mat-hint>
+            <mat-error *ngIf="formSubject.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
 
-          <mat-form-field class="normalize-font input-container" appearance="outline">
+          <mat-form-field class="normalize-font input-container" appearance="outline" hideRequiredMarker>
             <mat-label>Matéria</mat-label>
-            <mat-select [(ngModel)]="materiaId" [disabled]="materias.length === 0">
+            <mat-select formControlName="materiaId" [disabled]="materias.length === 0">
               <ng-container *ngFor="let mt of materias">
                 <mat-option [value]="mt.id">{{ mt.name }}</mat-option>
               </ng-container>
@@ -50,49 +52,54 @@
             <mat-hint *ngIf="materias.length === 0">
               Nenhuma matéria inserida
             </mat-hint>
+            <mat-error *ngIf="formSubject.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
 
-          <mat-form-field class="normalize-font input-container" appearance="outline" color="primary">
+          <mat-form-field class="normalize-font input-container" appearance="outline" color="primary" hideRequiredMarker>
             <mat-label>Data de Início</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="dataInicio" disabled>
+            <input matInput [matDatepicker]="picker" formControlName="dataInicio" [disabled]="true">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi [disabled]="false" #picker></mat-datepicker>
+            <mat-error *ngIf="formSubject.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
-        </div>
+        </form>
       </ng-template>
     </mat-tab>
 
     <mat-tab label="Frente">
       <ng-template matTabContent>
-        <div class="tab-content tab-label-top">
-          <mat-form-field class="normalize-font tab-label-top" appearance="outline">
+        <form id="subtopicForm" (ngSubmit)="saveSubtopic()" [formGroup]="formSubtopic" class="tab-content tab-label-top">
+          <mat-form-field class="normalize-font tab-label-top" appearance="outline" hideRequiredMarker>
             <mat-label>Frente</mat-label>
             <input
               matInput
               placeholder="Nome da Frente"
-              [(ngModel)]="subtopicName"
+              formControlName="subtopicName"
             />
+            <mat-error *ngIf="formSubtopic.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
-        </div>
+        </form>
       </ng-template>
     </mat-tab>
 
     <mat-tab label="Matéria">
       <ng-template matTabContent>
-        <div class="tab-content tab-label-top">
-          <mat-form-field class="normalize-font tab-label-top" appearance="outline">
+        <form id="materiaForm" (ngSubmit)="saveMateria()" [formGroup]="formMateria" class="tab-content tab-label-top">
+          <mat-form-field class="normalize-font tab-label-top" appearance="outline" hideRequiredMarker>
             <mat-label>Matéria</mat-label>
             <input
               matInput
               placeholder="Nome da Matéria"
-              [(ngModel)]="materiaName"
+              formControlName="materiaName"
             />
+            <mat-error *ngIf="formMateria.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
-          <mat-form-field class="normalize-font input-container" appearance="outline">
+          <mat-form-field class="normalize-font input-container" appearance="outline" hideRequiredMarker>
             <mat-label>Cor de Destaque</mat-label>
-            <input matInput type="color" [(ngModel)]="materiaColor">
+            <input matInput type="color" formControlName="materiaColor">
+            <mat-error *ngIf="formMateria.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
-        </div>
+        </form>
       </ng-template>
     </mat-tab>
   </mat-dialog-content>
@@ -103,27 +110,31 @@
   <button
     mat-flat-button
     color="primary"
+    type="submit"
+    form="subjectForm"
     *ngIf="tabType.valueOf() === 0"
     (click)="saveSubject()"
-    [disabled]="subjectName?.trim() === '' || subtopicId?.trim() === '' || materiaId?.trim() === ''"
+    [disabled]="formSubject.invalid"
   >
     Salvar
   </button>
   <button
     mat-flat-button
     color="primary"
+    type="submit"
+    form="subtopicForm"
     *ngIf="tabType.valueOf() === 1"
-    (click)="saveSubtopic()"
-    [disabled]="subtopicName?.trim() === ''"
+    [disabled]="formSubtopic.invalid"
   >
     Salvar
   </button>
   <button
     mat-flat-button
     color="primary"
+    type="submit"
+    form="materiaForm"
     *ngIf="tabType.valueOf() === 2"
-    (click)="saveMateria()"
-    [disabled]="materiaName?.trim() === ''"
+    [disabled]="formMateria.invalid"
   >
     Salvar
   </button>

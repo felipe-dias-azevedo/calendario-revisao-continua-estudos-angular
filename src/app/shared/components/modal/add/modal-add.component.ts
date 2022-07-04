@@ -9,6 +9,10 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {NewSubject, Subject} from "../../../services/subject/subject";
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import {NotifyService} from "../../../services/notify/notify.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormMateriaModel} from "./form-materia-model";
+import {FormSubjectModel} from "./form-subject-model";
+import {FormSubtopicModel} from "./form-subtopic-model";
 
 @Component({
   selector: 'app-modal-add',
@@ -20,45 +24,55 @@ export class ModalAddComponent implements OnInit {
   subtopics!: Subtopic[];
   materias!: Materia[];
 
+  formSubject!: FormGroup;
+  formSubtopic!: FormGroup;
+  formMateria!: FormGroup;
+
   tabType!: ModalAddTabType;
 
-  // TODO: Use angular forms for validation
-  // TODO: Detect if isMobile to touchUI on Datepicker (better accessibility)
-
-  subjectName!: string;
-  subtopicName!: string;
-  materiaName!: string;
-  subtopicId!: string;
-  materiaId!: string;
-  dataInicio!: Date;
-  materiaColor!: string;
-
-  private mensagemErro = 'Algum campo informado não foi preenchido';
-  private mensagemFechar = 'Fechar';
-
-
   constructor(
+    private formBuilder: FormBuilder,
     private subjectService: SubjectService,
     private subtopicService: SubtopicService,
     private materiaService: MateriaService,
     private notifyService: NotifyService
   ) { }
 
+
   ngOnInit(): void {
-    this.resetValues();
+    this.updateData();
 
     this.tabType = ModalAddTabType.Subject;
-    this.updateData();
+
+    this.formSubject = this.formBuilder.group({
+      subjectName: ['', [Validators.required, Validators.minLength(2)]],
+      subtopicId: [null, [Validators.required, Validators.minLength(2)]],
+      materiaId: [null, [Validators.required, Validators.minLength(2)]],
+      dataInicio: [new Date(), Validators.required]
+    });
+    this.formSubtopic = this.formBuilder.group({
+      subtopicName: ['', Validators.required]
+    });
+    this.formMateria = this.formBuilder.group({
+      materiaName: ['', [Validators.required, Validators.minLength(2)]],
+      materiaColor: ['#000000', [Validators.required, Validators.minLength(7), Validators.maxLength(7)]]
+    });
   }
 
   private resetValues() {
-    this.subjectName = '';
-    this.subtopicName = '';
-    this.materiaName = '';
-    this.subtopicId = '';
-    this.materiaId = '';
-    this.dataInicio = new Date();
-    this.materiaColor = '#000000';
+    this.formSubject.reset({
+      subjectName: '',
+      subtopicId: null,
+      materiaId: null,
+      dataInicio: new Date()
+    });
+    this.formSubtopic.reset({
+      subtopicName: ''
+    });
+    this.formMateria.reset({
+      materiaName: '',
+      materiaColor: '#000000'
+    });
   }
 
   private updateData() {
@@ -72,14 +86,11 @@ export class ModalAddComponent implements OnInit {
   }
 
   saveMateria() {
-    if (this.materiaName === undefined || this.materiaName.trim() === '') {
-      this.notifyError();
-      return;
-    }
+    const { materiaName, materiaColor } = this.formMateria.getRawValue() as FormMateriaModel;
 
     this.materiaService.add({
-      name: this.materiaName,
-      color: this.materiaColor
+      name: materiaName,
+      color: materiaColor
     });
 
     this.notify('Matéria salva com sucesso!');
@@ -88,23 +99,13 @@ export class ModalAddComponent implements OnInit {
   }
 
   saveSubject() {
-    if (
-      this.subjectName === undefined ||
-      this.subjectName.trim() === '' ||
-      this.subtopicId === undefined ||
-      this.subtopicId.trim() === '' ||
-      this.materiaId === undefined ||
-      this.materiaId.trim() === ''
-    ) {
-      this.notifyError();
-      return;
-    }
+    const { subjectName, materiaId, subtopicId, dataInicio } = this.formSubject.getRawValue() as FormSubjectModel;
 
     const subject: NewSubject = {
-      name: this.subjectName,
-      materiaId: this.materiaId,
-      subtopicId: this.subtopicId,
-      date: this.dataInicio
+      name: subjectName,
+      materiaId: materiaId,
+      subtopicId: subtopicId,
+      date: dataInicio
     };
 
     const daysToAdd = [0,7,15,30];
@@ -117,13 +118,10 @@ export class ModalAddComponent implements OnInit {
   }
 
   saveSubtopic() {
-    if (this.subtopicName === undefined || this.subtopicName.trim() === '') {
-      this.notifyError();
-      return;
-    }
+    const { subtopicName } = this.formSubtopic.getRawValue() as FormSubtopicModel;
 
     this.subtopicService.add({
-      name: this.subtopicName,
+      name: subtopicName,
     });
 
     this.notify('Frente salva com sucesso!');
@@ -133,9 +131,5 @@ export class ModalAddComponent implements OnInit {
 
   private notify(message: string) {
     this.notifyService.show(message);
-  }
-
-  private notifyError() {
-    this.notify(this.mensagemErro);
   }
 }

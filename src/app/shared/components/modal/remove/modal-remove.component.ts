@@ -6,7 +6,7 @@ import {NotifyService} from "../../../services/notify/notify.service";
 import {Subtopic} from "../../../services/subtopic/subtopic";
 import {Materia} from "../../../services/materia/materia";
 import {ModalRemoveTabType} from "./modal-remove-tab-type";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {ModalAlertComponent} from "../alert/modal-alert.component";
 import {ModalAlertResponse} from "../alert/modal-alert-response";
 
@@ -80,6 +80,7 @@ export class ModalRemoveComponent implements OnInit {
       this.notifyService.show('Frente deletada com sucesso!');
 
       this.resetValues();
+      this.updateData();
     });
   }
 
@@ -107,6 +108,7 @@ export class ModalRemoveComponent implements OnInit {
       this.notifyService.show('Matéria deletada com sucesso!');
 
       this.resetValues();
+      this.updateData();
     });
   }
 
