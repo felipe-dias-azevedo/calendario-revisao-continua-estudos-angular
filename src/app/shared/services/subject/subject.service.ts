@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ContextStorageService} from "../shared/context-storage/context-storage.service";
+import {ContextStorageService} from "../context-storage/context-storage.service";
 import {NewSubject, PreSubject, Subject} from "./subject";
 import {v4 as uuid} from "uuid";
 

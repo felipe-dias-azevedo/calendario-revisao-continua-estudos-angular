@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Materia, NewMateria} from "./materia";
-import {ContextStorageService} from "../shared/context-storage/context-storage.service";
+import {ContextStorageService} from "../context-storage/context-storage.service";
 
 @Injectable({
   providedIn: 'root'

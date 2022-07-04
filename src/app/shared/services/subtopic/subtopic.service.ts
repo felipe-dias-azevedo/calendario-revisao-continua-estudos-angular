@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ContextStorageService} from "../shared/context-storage/context-storage.service";
+import {ContextStorageService} from "../context-storage/context-storage.service";
 import {NewSubtopic, Subtopic} from "./subtopic";
 
 @Injectable({

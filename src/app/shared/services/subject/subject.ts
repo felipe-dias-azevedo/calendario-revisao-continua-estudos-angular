@@ -1,4 +1,4 @@
-import {IdentifiableContext} from "../shared/context-storage/identifiable-context";
+import {IdentifiableContext} from "../context-storage/identifiable-context";
 
 export interface NewSubject {
   name: string;

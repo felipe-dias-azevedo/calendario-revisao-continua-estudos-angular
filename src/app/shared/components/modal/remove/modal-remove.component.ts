@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTabChangeEvent} from "@angular/material/tabs";
-import {SubtopicService} from "../../subtopic/subtopic.service";
-import {MateriaService} from "../../materia/materia.service";
-import {NotifyService} from "../../shared/notify/notify.service";
-import {Subtopic} from "../../subtopic/subtopic";
-import {Materia} from "../../materia/materia";
+import {SubtopicService} from "../../../services/subtopic/subtopic.service";
+import {MateriaService} from "../../../services/materia/materia.service";
+import {NotifyService} from "../../../services/notify/notify.service";
+import {Subtopic} from "../../../services/subtopic/subtopic";
+import {Materia} from "../../../services/materia/materia";
 import {ModalRemoveTabType} from "./modal-remove-tab-type";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ModalAlertComponent} from "../../shared/components/modal-alert/modal-alert.component";
-import {ModalAlertResponse} from "../../shared/components/modal-alert/modal-alert-response";
+import {ModalAlertComponent} from "../alert/modal-alert.component";
+import {ModalAlertResponse} from "../alert/modal-alert-response";
 
 @Component({
   selector: 'app-modal-remove',

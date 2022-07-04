@@ -1,15 +1,15 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {IdentifiableContext} from "../../shared/context-storage/identifiable-context";
-import {Subject} from "../../subject/subject";
-import {SubjectService} from "../../subject/subject.service";
-import {NotifyService} from "../../shared/notify/notify.service";
-import {Subtopic} from "../../subtopic/subtopic";
-import {Materia} from "../../materia/materia";
-import {SubtopicService} from "../../subtopic/subtopic.service";
-import {MateriaService} from "../../materia/materia.service";
-import {ModalAlertComponent} from "../../shared/components/modal-alert/modal-alert.component";
-import {ModalAlertResponse} from "../../shared/components/modal-alert/modal-alert-response";
+import {IdentifiableContext} from "../../../services/context-storage/identifiable-context";
+import {Subject} from "../../../services/subject/subject";
+import {SubjectService} from "../../../services/subject/subject.service";
+import {NotifyService} from "../../../services/notify/notify.service";
+import {Subtopic} from "../../../services/subtopic/subtopic";
+import {Materia} from "../../../services/materia/materia";
+import {SubtopicService} from "../../../services/subtopic/subtopic.service";
+import {MateriaService} from "../../../services/materia/materia.service";
+import {ModalAlertComponent} from "../alert/modal-alert.component";
+import {ModalAlertResponse} from "../alert/modal-alert-response";
 
 @Component({
   selector: 'app-modal-details-subject',

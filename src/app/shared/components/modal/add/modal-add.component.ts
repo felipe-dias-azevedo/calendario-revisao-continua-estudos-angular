@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {SubjectService} from "../../subject/subject.service";
-import {SubtopicService} from "../../subtopic/subtopic.service";
-import {MateriaService} from "../../materia/materia.service";
-import {NewSubtopic, Subtopic} from "../../subtopic/subtopic";
-import {Materia, NewMateria} from "../../materia/materia";
+import {SubjectService} from "../../../services/subject/subject.service";
+import {SubtopicService} from "../../../services/subtopic/subtopic.service";
+import {MateriaService} from "../../../services/materia/materia.service";
+import {NewSubtopic, Subtopic} from "../../../services/subtopic/subtopic";
+import {Materia, NewMateria} from "../../../services/materia/materia";
 import {ModalAddTabType} from "./modal-add-tab-type";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {NewSubject, Subject} from "../../subject/subject";
+import {NewSubject, Subject} from "../../../services/subject/subject";
 import {MatTabChangeEvent} from "@angular/material/tabs";
-import {NotifyService} from "../../shared/notify/notify.service";
+import {NotifyService} from "../../../services/notify/notify.service";
 
 @Component({
   selector: 'app-modal-add',

@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {months} from "./shared/months";
-import {SubtopicService} from "./subtopic/subtopic.service";
-import {SubjectService} from "./subject/subject.service";
-import {MateriaService} from "./materia/materia.service";
-import {StudiesDaysList, StudyDay, StudyDayContent} from "./studies-day-list/studies-day-list";
-import {Subject} from "./subject/subject";
+import {months} from "./shared/constants/months";
+import {SubtopicService} from "./shared/services/subtopic/subtopic.service";
+import {SubjectService} from "./shared/services/subject/subject.service";
+import {MateriaService} from "./shared/services/materia/materia.service";
+import {StudiesDaysList, StudyDay, StudyDayContent} from "./shared/components/studies-day-list/studies-day-list";
+import {Subject} from "./shared/services/subject/subject";
 import {MatDialog} from "@angular/material/dialog";
-import {ModalAddComponent} from "./modal/add/modal-add.component";
-import {ModalRemoveComponent} from "./modal/remove/modal-remove.component";
+import {ModalAddComponent} from "./shared/components/modal/add/modal-add.component";
+import {ModalRemoveComponent} from "./shared/components/modal/remove/modal-remove.component";
 import './shared/extensions/date.extensions';
-import {getTextColorFrom} from "./shared/colors";
+import {getTextColorFrom} from "./shared/constants/colors";
 
 @Component({
   selector: 'app-root',

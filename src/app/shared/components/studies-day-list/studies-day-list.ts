@@ -1,4 +1,4 @@
-import {Subject} from "../subject/subject";
+import {Subject} from "../../services/subject/subject";
 
 export interface StudyDayContent {
   subject: Subject;
