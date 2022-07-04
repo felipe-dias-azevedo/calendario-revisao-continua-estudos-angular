@@ -1,0 +1,72 @@
+<mat-toolbar color="primary" class="toolbar-header">
+  <div class="title">
+    <button
+      mat-icon-button
+      class="next-left"
+      (click)="previousMonth()"
+      matTooltip="Retroceder Mês"
+    >
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <div class="month-title">
+      <h1 class="force-font" (click)="goToTodayTitle()">
+        {{ currentMonth }}
+      </h1>
+    </div>
+    <button
+      mat-icon-button
+      class="next-right"
+      (click)="nextMonth()"
+      matTooltip="Avançar Mês"
+    >
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+    <button
+      mat-raised-button
+      class="force-font today-option"
+      (click)="goToToday()"
+      matTooltip="Ir para o dia de hoje"
+    >
+      Hoje 📅
+    </button>
+  </div>
+  <div class="options">
+    <button
+      mat-icon-button
+      class="add-subject"
+      (click)="showRemoveModal()"
+      matTooltip="Remover"
+    >
+      <mat-icon>remove</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="add-subject"
+      (click)="showAddModal()"
+      matTooltip="Adicionar"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <mat-form-field class="normalize-font">
+      <mat-label>Pesquisa</mat-label>
+      <input
+        matInput
+        (keyup)="updateData()"
+        [(ngModel)]="textFilter"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+</mat-toolbar>
+<main id="studies-day-list">
+  <div
+    *ngFor="let studyDay of subjectPerDayList"
+    app-studies-day-list
+    [day]="studyDay.day"
+    [subjectsToday]="studyDay.content"
+    (updateChildren)="updateData()"
+    id="dia-{{ studyDay.day }}"
+    class="study-day {{ isTodayStudyDay(studyDay.day) ? 'today-study-day' : '' }}"
+  >
+  </div>
+</main>

@@ -1,0 +1,84 @@
+<div class="modal-header">
+  <h4 class="force-font">Remover</h4>
+
+  <button
+    mat-icon-button
+    [mat-dialog-close]="true"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-tab-group
+  class="tab-label-top"
+  mat-align-tabs="center"
+  animationDuration="0ms"
+  (selectedTabChange)="changeTabType($event)"
+>
+  <mat-dialog-content>
+    <mat-tab label="Frente">
+      <ng-template matTabContent>
+        <div class="tab-content tab-label-top">
+          <mat-form-field class="normalize-font input-container" appearance="outline">
+            <mat-label>Frente</mat-label>
+            <mat-select [(ngModel)]="subtopicId" [disabled]="subtopics.length === 0">
+              <mat-option [value]="">-- Selecione --</mat-option>
+              <ng-container *ngFor="let st of subtopics">
+                <mat-option [value]="st.id">{{ st.name }}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-hint *ngIf="subtopics.length === 0">
+              Nenhuma frente inserida
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Matéria">
+      <ng-template matTabContent>
+        <div class="tab-content tab-label-top">
+          <mat-form-field class="normalize-font input-container" appearance="outline">
+            <mat-label>Matéria</mat-label>
+            <mat-select [(ngModel)]="materiaId" [disabled]="materias.length === 0">
+              <mat-option [value]="">-- Selecione --</mat-option>
+              <ng-container *ngFor="let mt of materias">
+                <mat-option [value]="mt.id">{{ mt.name }}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-hint *ngIf="materias.length === 0">
+              Nenhuma matéria inserida
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-dialog-content>
+</mat-tab-group>
+
+<mat-dialog-actions align="end">
+  <button
+    mat-flat-button
+    [mat-dialog-close]="true"
+  >
+    Cancelar
+  </button>
+  <button
+    mat-flat-button
+    color="warn"
+    *ngIf="tabType.valueOf() === 0"
+    (click)="deleteSubtopic()"
+    [disabled]="subtopicId?.trim() === ''"
+  >
+    Deletar
+  </button>
+  <button
+    mat-flat-button
+    color="warn"
+    *ngIf="tabType.valueOf() === 1"
+    (click)="deleteMateria()"
+    [disabled]="materiaId?.trim() === ''"
+  >
+    Deletar
+  </button>
+</mat-dialog-actions>

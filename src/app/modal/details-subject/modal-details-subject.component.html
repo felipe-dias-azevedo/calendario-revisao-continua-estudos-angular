@@ -1,0 +1,67 @@
+<div class="modal-header">
+  <h4 class="force-font">Detalhes</h4>
+
+  <button
+    mat-icon-button
+    [mat-dialog-close]="true"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <mat-list class="pd-t-2 pd-b-2">
+
+    <mat-divider></mat-divider>
+
+    <div class="force-font" mat-subheader>Nome da Disciplina</div>
+    <mat-list-item>
+      <b class="force-font" mat-line>{{ subject.name }}</b>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <div class="force-font" mat-subheader>Data da Disciplina</div>
+    <mat-list-item>
+      <b class="force-font" mat-line>{{ subject.date | date: 'dd/MM/yyyy' }}</b>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <div class="force-font" mat-subheader>Nome da Frente</div>
+    <mat-list-item>
+      <b class="force-font" mat-line>{{ subtopic?.name }}</b>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <div class="force-font" mat-subheader>Nome da Matéria</div>
+    <mat-list-item>
+      <b class="force-font" mat-line>{{ materia?.name }}</b>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+  </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button [mat-dialog-close]="true">Cancelar</button>
+  <button
+    mat-button
+    color="warn"
+    (click)="deleteSubject()"
+    matTooltip="Irá excluir somente esta ocorrência da disciplina"
+    matTooltipPosition="above"
+  >
+    Deletar Uma
+  </button>
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="deleteAllSubjects()"
+    matTooltip="Excluir todas as ocorrências com o nome desta disciplina"
+    matTooltipPosition="above"
+  >
+    Deletar Todas
+  </button>
+</mat-dialog-actions>

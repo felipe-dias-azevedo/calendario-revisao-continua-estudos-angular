@@ -1,0 +1,112 @@
+
+.toolbar-header {
+  height: 10%;
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  width: 100%;
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*background-color: white;*/
+  /*border-bottom: 2px solid black;*/
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.3);
+  padding: 0 1.5rem;
+}
+
+.toolbar-header h1 {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.title {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.month-title {
+  width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.next-left {
+  margin-right: 1rem;
+}
+
+.next-right {
+  margin-left: 1rem;
+  margin-right: 2rem;
+}
+
+.circlewrap {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in-out;
+}
+
+.circlewrap:hover {
+  background-color: lightgrey;
+}
+
+.circlewrap:active {
+  background-color: grey;
+}
+
+.options {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.search-subject {
+  width: auto;
+  transition: 0.3s ease-in-out;
+}
+
+.add-subject {
+  margin-right: 1rem;
+}
+
+main {
+  margin: calc(10% + 1rem) 1.5rem 1.5rem;
+  padding-bottom: 1rem;
+  overflow-y: auto;
+}
+
+.subject-container {
+  height: 100%;
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+}
+
+.study-day + .study-day {
+  margin: 1rem 0;
+}
+
+.study-day {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: lightgrey;
+  padding: 0 1rem;
+  border-radius: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.today-study-day {
+  border: 4px solid black;
+}

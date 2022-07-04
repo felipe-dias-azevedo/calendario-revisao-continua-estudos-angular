@@ -1,0 +1,132 @@
+<div class="modal-header">
+  <h4 class="force-font">Adicionar</h4>
+
+  <button
+    mat-icon-button
+    [mat-dialog-close]="true"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-tab-group
+  class="tab-label-top"
+  mat-align-tabs="center"
+  animationDuration="0ms"
+  (selectedTabChange)="changeTabType($event)"
+>
+  <mat-dialog-content>
+    <mat-tab label="Disciplina">
+      <ng-template matTabContent >
+        <div class="tab-content tab-label-top">
+          <mat-form-field class="normalize-font input-container" appearance="outline">
+            <mat-label>Disciplina</mat-label>
+            <input
+              matInput
+              placeholder="Nome da Disciplina"
+              [(ngModel)]="subjectName"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="normalize-font input-container" appearance="outline">
+            <mat-label>Frente</mat-label>
+            <mat-select [(ngModel)]="subtopicId" [disabled]="subtopics.length === 0">
+              <mat-option [value]="">-- Selecione --</mat-option>
+              <ng-container *ngFor="let st of subtopics">
+                <mat-option [value]="st.id">{{ st.name }}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-hint *ngIf="subtopics.length === 0">
+              Nenhuma frente inserida
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="normalize-font input-container" appearance="outline">
+            <mat-label>Matéria</mat-label>
+            <mat-select [(ngModel)]="materiaId" [disabled]="materias.length === 0">
+              <mat-option [value]="">-- Selecione --</mat-option>
+              <ng-container *ngFor="let mt of materias">
+                <mat-option [value]="mt.id">{{ mt.name }}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-hint *ngIf="materias.length === 0">
+              Nenhuma matéria inserida
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="normalize-font input-container" appearance="outline" color="primary">
+            <mat-label>Data de Início</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="dataInicio" disabled>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi [disabled]="false" #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Frente">
+      <ng-template matTabContent>
+        <div class="tab-content tab-label-top">
+          <mat-form-field class="normalize-font tab-label-top" appearance="outline">
+            <mat-label>Frente</mat-label>
+            <input
+              matInput
+              placeholder="Nome da Frente"
+              [(ngModel)]="subtopicName"
+            />
+          </mat-form-field>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Matéria">
+      <ng-template matTabContent>
+        <div class="tab-content tab-label-top">
+          <mat-form-field class="normalize-font tab-label-top" appearance="outline">
+            <mat-label>Matéria</mat-label>
+            <input
+              matInput
+              placeholder="Nome da Matéria"
+              [(ngModel)]="materiaName"
+            />
+          </mat-form-field>
+          <mat-form-field class="normalize-font input-container" appearance="outline">
+            <mat-label>Cor de Destaque</mat-label>
+            <input matInput type="color" [(ngModel)]="materiaColor">
+          </mat-form-field>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-dialog-content>
+</mat-tab-group>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button [mat-dialog-close]="true">Cancelar</button>
+  <button
+    mat-flat-button
+    color="primary"
+    *ngIf="tabType.valueOf() === 0"
+    (click)="saveSubject()"
+    [disabled]="subjectName?.trim() === '' || subtopicId?.trim() === '' || materiaId?.trim() === ''"
+  >
+    Salvar
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    *ngIf="tabType.valueOf() === 1"
+    (click)="saveSubtopic()"
+    [disabled]="subtopicName?.trim() === ''"
+  >
+    Salvar
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    *ngIf="tabType.valueOf() === 2"
+    (click)="saveMateria()"
+    [disabled]="materiaName?.trim() === ''"
+  >
+    Salvar
+  </button>
+</mat-dialog-actions>

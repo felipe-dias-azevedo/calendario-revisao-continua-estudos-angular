@@ -1,0 +1,59 @@
+
+/* até 800px de largura */
+/* MOBILE */
+@media (max-width: 800px) {
+  .toolbar-header {
+    height: 20%;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title {
+    width: auto;
+    justify-content: center;
+    margin: 0 0 1rem;
+  }
+
+  .next-right {
+    margin-right: 0;
+  }
+
+  .today-option {
+    display: none;
+  }
+
+  .options {
+    width: auto;
+    justify-content: center;
+  }
+
+  .modal-subheader {
+    padding: 0;
+  }
+
+  .modal-container {
+    height: 98%;
+    width: 95%;
+  }
+
+  .modal-content {
+    margin-top: 1rem;
+    padding: 0 2rem;
+  }
+}
+
+/* até 1000px de altura e 800px de largura */
+/* MOBILE */
+@media (max-height: 1000px) and (max-width: 800px) {
+  main {
+    margin-top: calc(100vh * 0.2 + 1.5rem);
+  }
+}
+
+/* depois de 1000px de altura e 800px de largura */
+/* MOBILE */
+@media (min-width: 801px) {
+  main {
+    margin-top: calc(100vh * 0.1 + 1.5rem);
+  }
+}
