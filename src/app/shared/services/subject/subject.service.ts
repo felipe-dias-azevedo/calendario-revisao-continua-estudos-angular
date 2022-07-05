@@ -67,4 +67,8 @@ export class SubjectService {
       .filter(s => s.name === name)
       .forEach(s => this.deleteById(s.id));
   }
+
+  deleteAll(): void {
+    this.contextStorageService.deleteAll(this.key);
+  }
 }

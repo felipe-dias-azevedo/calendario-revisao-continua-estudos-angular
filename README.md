@@ -14,7 +14,7 @@ Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fon
 - [x] Deletar todas ocorrencias por ID pai (invés de nome)
 - [x] Formulario angular para validação na criação
 - [ ] Adicionar novas repetições para uma disciplina
-- [ ] Opção de resetar todos os dados (para desenvolvedor)
+- [x] Opção de resetar todos os dados (para desenvolvedor)
 - [x] Atualizar uma disciplina (todas as ocorrencias)
 - [ ] Opções de repetição customizadas
 - [ ] Visualização em formato de calendário

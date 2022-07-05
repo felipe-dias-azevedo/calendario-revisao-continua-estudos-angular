@@ -26,4 +26,8 @@ export class SubtopicService {
   deleteById(id: string): void {
     this.contextStorageService.deleteById(this.key, id);
   }
+
+  deleteAll(): void {
+    this.contextStorageService.deleteAll(this.key);
+  }
 }

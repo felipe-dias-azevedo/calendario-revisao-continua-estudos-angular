@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private subjectService: SubjectService,
+    private subtopicService: SubtopicService,
     private materiaService: MateriaService
   ) {}
 
@@ -146,6 +147,9 @@ export class AppComponent implements OnInit {
   }
 
   resetData() {
-
+    this.subjectService.deleteAll();
+    this.subtopicService.deleteAll();
+    this.materiaService.deleteAll();
+    this.updateMonth();
   }
 }
