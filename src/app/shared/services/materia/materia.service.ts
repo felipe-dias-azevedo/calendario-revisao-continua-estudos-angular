@@ -9,7 +9,7 @@ export class MateriaService {
 
   private key = 'materias';
 
-  constructor(private contextStorageService: ContextStorageService<Materia, NewMateria>) { }
+  constructor(private contextStorageService: ContextStorageService<NewMateria, Materia>) { }
 
   get(): Materia[] {
     return this.contextStorageService.get(this.key);

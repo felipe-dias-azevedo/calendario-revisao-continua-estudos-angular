@@ -31,6 +31,16 @@
     </button>
   </div>
   <div class="options">
+    <ng-container *ngIf="isDev">
+      <button
+        mat-icon-button
+        class="add-subject"
+        (click)="resetData()"
+        matTooltip="Resetar dados"
+      >
+        <mat-icon>cached</mat-icon>
+      </button>
+    </ng-container>
     <button
       mat-icon-button
       class="add-subject"

@@ -54,13 +54,7 @@
   </mat-dialog-content>
 </mat-tab-group>
 
-<mat-dialog-actions align="end">
-  <button
-    mat-flat-button
-    [mat-dialog-close]="true"
-  >
-    Cancelar
-  </button>
+<mat-dialog-actions align="start">
   <button
     mat-flat-button
     color="warn"
@@ -78,5 +72,11 @@
     [disabled]="materiaId?.trim() === ''"
   >
     Deletar
+  </button>
+  <button
+    mat-flat-button
+    [mat-dialog-close]="true"
+  >
+    Cancelar
   </button>
 </mat-dialog-actions>

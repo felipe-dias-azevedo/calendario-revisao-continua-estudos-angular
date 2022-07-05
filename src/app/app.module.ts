@@ -25,6 +25,8 @@ import {MatListModule} from "@angular/material/list";
 import { ModalAlertComponent } from './shared/components/modal/alert/modal-alert.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatChipsModule} from "@angular/material/chips";
+import { ModalUpdateSubjectComponent } from './shared/components/modal/update-subject/modal-update-subject.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -33,34 +35,36 @@ import {MatChipsModule} from "@angular/material/chips";
     ModalDetailsSubjectComponent,
     ModalRemoveComponent,
     ModalAddComponent,
-    ModalAlertComponent
+    ModalAlertComponent,
+    ModalUpdateSubjectComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-    FormsModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatTabsModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSnackBarModule,
-    MatListModule,
-    MatTooltipModule,
-    ReactiveFormsModule,
-    MatChipsModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        FormsModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatTabsModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSnackBarModule,
+        MatListModule,
+        MatTooltipModule,
+        ReactiveFormsModule,
+        MatChipsModule,
+        MatMenuModule
+    ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],

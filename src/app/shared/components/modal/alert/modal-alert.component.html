@@ -14,9 +14,6 @@
 </div>
 
 <mat-dialog-content>
-  <div class="alert-icon-container">
-
-  </div>
   <p class="force-font text-title tab-label-top">
     Você tem certeza em deletar {{ alertTypeContent.typeContent }}?
   </p>
@@ -25,7 +22,7 @@
   </p>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-flat-button (click)="confirmAction(false)">Não</button>
+<mat-dialog-actions class="mg-t-1" align="start">
   <button mat-flat-button color="warn" (click)="confirmAction(true)">Sim</button>
+  <button mat-flat-button (click)="confirmAction(false)">Não</button>
 </mat-dialog-actions>

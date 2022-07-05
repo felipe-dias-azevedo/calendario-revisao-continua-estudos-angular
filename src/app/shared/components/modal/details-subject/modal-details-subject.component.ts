@@ -10,6 +10,7 @@ import {SubtopicService} from "../../../services/subtopic/subtopic.service";
 import {MateriaService} from "../../../services/materia/materia.service";
 import {ModalAlertComponent} from "../alert/modal-alert.component";
 import {ModalAlertResponse} from "../alert/modal-alert-response";
+import {ModalUpdateSubjectComponent} from "../update-subject/modal-update-subject.component";
 
 @Component({
   selector: 'app-modal-details-subject',
@@ -33,6 +34,10 @@ export class ModalDetailsSubjectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getData();
+  }
+
+  private getData() {
     const subject = this.subjectService.getById(this.data.id);
 
     if (subject === null) {
@@ -83,5 +88,17 @@ export class ModalDetailsSubjectComponent implements OnInit {
 
       this.dialogRef.close();
     });
+  }
+
+  updateSubject() {
+    const updateDialog = this.dialog.open(ModalUpdateSubjectComponent, {
+      panelClass: 'modal-container',
+      data: {
+        subject: this.subject,
+        subtopic: this.subtopic,
+        materia: this.materia
+      }
+    });
+    updateDialog.afterClosed().subscribe(() => this.getData());
   }
 }

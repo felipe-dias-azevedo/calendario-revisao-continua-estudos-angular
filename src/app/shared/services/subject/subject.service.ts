@@ -11,7 +11,7 @@ export class SubjectService {
   private key = 'subjects';
 
   constructor(
-    private contextStorageService: ContextStorageService<Subject, PreSubject>
+    private contextStorageService: ContextStorageService<PreSubject, Subject>
   ) { }
 
   get(): Subject[] {
@@ -38,6 +38,18 @@ export class SubjectService {
     });
 
     subjects.forEach(s => this.add(s));
+  }
+
+  update(id: string, subject: PreSubject): void {
+    this.contextStorageService.update(this.key, id, subject);
+  }
+
+  updateByParentId(parentId: string, subject: PreSubject): void {
+    this.get()
+      .filter(s => s.parentId === parentId)
+      .forEach(s => this.contextStorageService.update(this.key, s.id, {
+        ...subject, date: s.date, parentId: s.parentId
+      }));
   }
 
   deleteById(id: string): void {

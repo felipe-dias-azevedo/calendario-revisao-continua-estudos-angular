@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h4 class="force-font">Atualizar</h4>
+
+    <button
+        mat-icon-button
+        [mat-dialog-close]="true"
+    >
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+    <form id="subjectForm" (ngSubmit)="updateSubjects()" [formGroup]="formUpdateSubject" class="tab-content tab-label-top">
+        <mat-form-field class="normalize-font input-container" appearance="outline" hideRequiredMarker>
+            <mat-label>Disciplina</mat-label>
+            <input
+                matInput
+                placeholder="Nome da Disciplina"
+                formControlName="subjectName"
+            />
+            <mat-error *ngIf="formUpdateSubject.invalid">Este campo é obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="normalize-font input-container" appearance="outline" hideRequiredMarker>
+            <mat-label>Frente</mat-label>
+            <mat-select formControlName="subtopicId" [disabled]="subtopics.length === 0">
+                <ng-container *ngFor="let st of subtopics">
+                    <mat-option [value]="st.id">{{ st.name }}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-hint *ngIf="subtopics.length === 0">
+                Nenhuma frente inserida
+            </mat-hint>
+            <mat-error *ngIf="formUpdateSubject.invalid">Este campo é obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="normalize-font input-container" appearance="outline" hideRequiredMarker>
+            <mat-label>Matéria</mat-label>
+            <mat-select formControlName="materiaId" [disabled]="materias.length === 0">
+                <ng-container *ngFor="let mt of materias">
+                    <mat-option [value]="mt.id">{{ mt.name }}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-hint *ngIf="materias.length === 0">
+                Nenhuma matéria inserida
+            </mat-hint>
+            <mat-error *ngIf="formUpdateSubject.invalid">Este campo é obrigatório.</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="start">
+    <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        form="subjectForm"
+        [disabled]="formUpdateSubject.invalid"
+    >
+        Salvar
+    </button>
+    <button mat-flat-button [mat-dialog-close]="true">Cancelar</button>
+</mat-dialog-actions>

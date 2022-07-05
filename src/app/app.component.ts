@@ -10,6 +10,7 @@ import {ModalAddComponent} from "./shared/components/modal/add/modal-add.compone
 import {ModalRemoveComponent} from "./shared/components/modal/remove/modal-remove.component";
 import './shared/extensions/date.extensions';
 import {getTextColorFrom} from "./shared/constants/colors";
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -25,12 +26,13 @@ export class AppComponent implements OnInit {
 
   subjectPerDayList!: StudiesDaysList;
   currentMonth!: string;
-  textFilter!: string
+  textFilter!: string;
+
+  isDev = !environment.production;
 
   constructor(
     private dialog: MatDialog,
     private subjectService: SubjectService,
-    private subtopicService: SubtopicService,
     private materiaService: MateriaService
   ) {}
 
@@ -141,5 +143,9 @@ export class AppComponent implements OnInit {
     const modalAdd = this.dialog.open(ModalAddComponent, { panelClass: 'modal-container' });
 
     modalAdd.afterClosed().subscribe(() => this.updateMonth());
+  }
+
+  resetData() {
+
   }
 }

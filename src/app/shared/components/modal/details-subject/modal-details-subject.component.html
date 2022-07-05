@@ -44,24 +44,43 @@
   </mat-list>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-flat-button [mat-dialog-close]="true">Cancelar</button>
+<mat-dialog-actions align="start">
   <button
-    mat-button
-    color="warn"
-    (click)="deleteSubject()"
-    matTooltip="Excluir somente esta ocorrência da disciplina"
+    mat-flat-button
+    color="primary"
+    matTooltip="Inserir novas ocorrências desta disciplina"
     matTooltipPosition="above"
   >
-    Deletar
+    Repetir
   </button>
   <button
     mat-flat-button
-    color="warn"
-    (click)="deleteAllSubjects()"
-    matTooltip="Excluir todas as ocorrências desta disciplina"
+    color="accent"
+    (click)="updateSubject()"
+    matTooltip="Atualizar dados desta disciplina"
     matTooltipPosition="above"
   >
-    Deletar Todas
+    Atualizar
   </button>
+  <button mat-flat-button color="warn" [matMenuTriggerFor]="menu">
+    <span>Deletar</span>
+    <mat-icon class="mg-l">delete</mat-icon>
+  </button>
+  <button mat-flat-button [mat-dialog-close]="true">Cancelar</button>
+  <mat-menu #menu="matMenu" yPosition="above">
+    <button
+      mat-menu-item
+      (click)="deleteSubject()"
+    >
+      <mat-icon color="warn">dangerous</mat-icon>
+      <span>Deletar</span>
+    </button>
+    <button
+      mat-menu-item
+      (click)="deleteAllSubjects()"
+    >
+      <mat-icon color="warn">playlist_remove</mat-icon>
+      <span>Deletar Todas</span>
+    </button>
+  </mat-menu>
 </mat-dialog-actions>

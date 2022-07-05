@@ -9,7 +9,7 @@ export class SubtopicService {
 
   private key = 'subtopics';
 
-  constructor(private contextStorageService: ContextStorageService<Subtopic, NewSubtopic>) { }
+  constructor(private contextStorageService: ContextStorageService<NewSubtopic, Subtopic>) { }
 
   get(): Subtopic[] {
     return this.contextStorageService.get(this.key);

@@ -5,7 +5,7 @@ import {IdentifiableContext} from "./identifiable-context";
 @Injectable({
   providedIn: 'root'
 })
-export class ContextStorageService <T extends IdentifiableContext, NT> {
+export class ContextStorageService <NT, T extends IdentifiableContext & NT> {
 
   constructor() { }
 
@@ -25,8 +25,7 @@ export class ContextStorageService <T extends IdentifiableContext, NT> {
     return content || null;
   }
 
-  add(key: string, content: NT): void {
-    const newContent = { id: uuid(), ...content };
+  private addNew(key: string, newContent: IdentifiableContext & NT): void {
     const contentString = localStorage.getItem(key);
 
     if (contentString === null) {
@@ -39,6 +38,26 @@ export class ContextStorageService <T extends IdentifiableContext, NT> {
     const contents = [...oldContent, newContent];
     const jsonContent = JSON.stringify(contents);
     localStorage.setItem(key, jsonContent);
+  }
+
+  add(key: string, content: NT): void {
+    const newContent: IdentifiableContext & NT = { id: uuid(), ...content };
+
+    this.addNew(key, newContent);
+  }
+
+  update(key: string, id: string, content: NT): void {
+    const value = this.getById(key, id);
+
+    if (value === null) {
+      return;
+    }
+
+    const updatedContent: T = { ...value, ...content, id };
+
+    this.deleteById(key, id);
+
+    this.addNew(key, updatedContent);
   }
 
   deleteById(key: string, id: string): void {
