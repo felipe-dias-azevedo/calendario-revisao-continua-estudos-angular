@@ -19,6 +19,9 @@
   </p>
   <p class="force-font text-content">
     {{ alertTypeContent.nameContent }}
+    <span *ngIf="alertTypeContent.dateContent">
+      - {{ alertTypeContent.dateContent | date: 'dd/MM/yyyy' }}
+    </span>
   </p>
 </mat-dialog-content>
 

@@ -54,7 +54,8 @@ export class ModalDetailsSubjectComponent implements OnInit {
     const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
       data: {
         typeContent: 'a ocorrência da seguinte Disciplina',
-        nameContent: this.subject.name
+        nameContent: this.subject.name,
+        dateContent: this.subject.date
       }
     });
     confirmationDialog.afterClosed().subscribe(result => {
