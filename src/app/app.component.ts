@@ -11,6 +11,8 @@ import {ModalRemoveComponent} from "./shared/components/modal/remove/modal-remov
 import './shared/extensions/date.extensions';
 import {getTextColorFrom} from "./shared/constants/colors";
 import { environment } from '../environments/environment';
+import {ModalAlertComponent} from "./shared/components/modal/alert/modal-alert.component";
+import {ModalAlertResponse} from "./shared/components/modal/alert/modal-alert-response";
 
 @Component({
   selector: 'app-root',
@@ -52,7 +54,7 @@ export class AppComponent implements OnInit {
 
     const subjectsForDay = subjects
       .filter(s => s.date.isSameDate(new Date(this.now.getFullYear(), month, day)))
-      .filter(s => s.name.toLowerCase().includes(this.textFilter))
+      .filter(s => s.name.toLowerCase().includes(this.textFilter.toLowerCase()))
       .map(s => {
         const materia = this.materiaService.getById(s.materiaId);
         const color = materia === null ? '#000000' : materia.color;
@@ -147,9 +149,21 @@ export class AppComponent implements OnInit {
   }
 
   resetData() {
-    this.subjectService.deleteAll();
-    this.subtopicService.deleteAll();
-    this.materiaService.deleteAll();
-    this.updateMonth();
+    const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
+      data: {
+        typeContent: 'todos os dados',
+        nameContent: ''
+      }
+    });
+    confirmationDialog.afterClosed().subscribe(result => {
+      if (result === undefined || !result.confirm) {
+        return;
+      }
+
+      this.subjectService.deleteAll();
+      this.subtopicService.deleteAll();
+      this.materiaService.deleteAll();
+      this.updateMonth();
+    });
   }
 }
