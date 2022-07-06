@@ -3,6 +3,21 @@
     align-items: flex-end;
 }
 
+@media (max-width: 800px) {
+    .modal-header {
+        align-items: flex-start;
+    }
+
+    .title-alert {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.close-alert {
+    margin-left: 2rem;
+}
+
 .alert-icon {
     margin-right: 1rem;
     font-size: 2rem;
