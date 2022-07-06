@@ -1,15 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SubjectService} from "../../../services/subject/subject.service";
 import {SubtopicService} from "../../../services/subtopic/subtopic.service";
 import {MateriaService} from "../../../services/materia/materia.service";
-import {NewSubtopic, Subtopic} from "../../../services/subtopic/subtopic";
-import {Materia, NewMateria} from "../../../services/materia/materia";
+import {Subtopic} from "../../../services/subtopic/subtopic";
+import {Materia} from "../../../services/materia/materia";
 import {ModalAddTabType} from "./modal-add-tab-type";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {NewSubject, Subject} from "../../../services/subject/subject";
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import {NotifyService} from "../../../services/notify/notify.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {FormMateriaModel} from "./form-materia-model";
 import {FormSubjectModel} from "./form-subject-model";
 import {FormSubtopicModel} from "./form-subtopic-model";
@@ -85,7 +84,7 @@ export class ModalAddComponent implements OnInit {
     this.updateData();
   }
 
-  saveMateria() {
+  saveMateria(formMateriaElement: FormGroupDirective) {
     const { materiaName, materiaColor } = this.formMateria.getRawValue() as FormMateriaModel;
 
     this.materiaService.add({
@@ -95,10 +94,11 @@ export class ModalAddComponent implements OnInit {
 
     this.notify('Matéria salva com sucesso!');
 
+    formMateriaElement.resetForm();
     this.resetValues();
   }
 
-  saveSubject() {
+  saveSubject(formSubjectElement: FormGroupDirective) {
     const { subjectName, materiaId, subtopicId, dataInicio } = this.formSubject.getRawValue() as FormSubjectModel;
 
     const subject: NewSubject = {
@@ -114,10 +114,11 @@ export class ModalAddComponent implements OnInit {
 
     this.notify('Disciplina salva com sucesso!');
 
+    formSubjectElement.resetForm();
     this.resetValues();
   }
 
-  saveSubtopic() {
+  saveSubtopic(formSubtopicElement: FormGroupDirective) {
     const { subtopicName } = this.formSubtopic.getRawValue() as FormSubtopicModel;
 
     this.subtopicService.add({
@@ -126,6 +127,7 @@ export class ModalAddComponent implements OnInit {
 
     this.notify('Frente salva com sucesso!');
 
+    formSubtopicElement.resetForm();
     this.resetValues();
   }
 

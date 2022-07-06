@@ -18,7 +18,13 @@
   <mat-dialog-content>
     <mat-tab label="Disciplina">
       <ng-template matTabContent >
-        <form id="subjectForm" (ngSubmit)="saveSubject()" [formGroup]="formSubject" class="tab-content tab-label-top">
+        <form
+          id="subjectForm"
+          #formSubjectElement="ngForm"
+          (ngSubmit)="saveSubject(formSubjectElement)"
+          [formGroup]="formSubject"
+          class="tab-content tab-label-top"
+        >
           <mat-form-field class="normalize-font input-container" appearance="outline" hideRequiredMarker>
             <mat-label>Disciplina</mat-label>
             <input
@@ -68,7 +74,13 @@
 
     <mat-tab label="Frente">
       <ng-template matTabContent>
-        <form id="subtopicForm" (ngSubmit)="saveSubtopic()" [formGroup]="formSubtopic" class="tab-content tab-label-top">
+        <form
+          id="subtopicForm"
+          #formSubtopicElement="ngForm"
+          (ngSubmit)="saveSubtopic(formSubtopicElement)"
+          [formGroup]="formSubtopic"
+          class="tab-content tab-label-top"
+        >
           <mat-form-field class="normalize-font tab-label-top" appearance="outline" hideRequiredMarker>
             <mat-label>Frente</mat-label>
             <input
@@ -84,7 +96,13 @@
 
     <mat-tab label="Matéria">
       <ng-template matTabContent>
-        <form id="materiaForm" (ngSubmit)="saveMateria()" [formGroup]="formMateria" class="tab-content tab-label-top">
+        <form
+          id="materiaForm"
+          #formMateriaElement="ngForm"
+          (ngSubmit)="saveMateria(formMateriaElement)"
+          [formGroup]="formMateria"
+          class="tab-content tab-label-top"
+        >
           <mat-form-field class="normalize-font tab-label-top" appearance="outline" hideRequiredMarker>
             <mat-label>Matéria</mat-label>
             <input
