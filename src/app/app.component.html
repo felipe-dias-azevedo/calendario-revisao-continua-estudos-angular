@@ -27,7 +27,7 @@
       (click)="goToToday()"
       matTooltip="Ir para o dia de hoje"
     >
-      Hoje 📅
+      Hoje
     </button>
   </div>
   <div class="options">
@@ -77,6 +77,5 @@
     (updateChildren)="updateData()"
     id="dia-{{ studyDay.day }}"
     class="study-day {{ isTodayStudyDay(studyDay.day) ? 'today-study-day' : '' }}"
-  >
-  </div>
+  ></div>
 </main>

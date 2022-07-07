@@ -27,6 +27,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatChipsModule} from "@angular/material/chips";
 import { ModalUpdateSubjectComponent } from './shared/components/modal/update-subject/modal-update-subject.component';
 import {MatMenuModule} from "@angular/material/menu";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {MatMenuModule} from "@angular/material/menu";
         MatTooltipModule,
         ReactiveFormsModule,
         MatChipsModule,
-        MatMenuModule
+        MatMenuModule,
+        MatCardModule
     ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
