@@ -33,7 +33,7 @@
 }
 
 .study-day {
-  height: 80px;
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -53,7 +53,8 @@ h3 {
 }
 
 div.mat-chip-list-wrapper {
-  flex-wrap: nowrap;
+  /*flex-wrap: nowrap;*/
+  padding: 1rem 0;
 }
 
 .subject {

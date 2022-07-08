@@ -17,7 +17,7 @@ Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fon
 - [x] Opção de resetar todos os dados (para desenvolvedor)
 - [x] Atualizar uma disciplina (todas as ocorrencias)
 - [ ] Especificar dia da semana escrito para cada dia na lista principal
-- [ ] colocar chips da principal sem scroll (height dinamico)
+- [x] colocar chips da principal sem scroll (height dinamico)
 - [ ] colocar informações básicas da disciplina em repetir ocorrencias
 - [ ] Opções de repetição customizadas
 - [ ] Visualização em formato de calendário
