@@ -18,12 +18,13 @@ Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fon
 - [x] Atualizar uma disciplina (todas as ocorrencias)
 - [x] Especificar dia da semana escrito para cada dia na lista principal
 - [x] colocar chips da principal sem scroll (height dinamico)
-- [ ] colocar informações básicas da disciplina em repetir ocorrencias
-- [ ] Opções de repetição customizadas
-- [ ] Visualização em formato de calendário
+- [x] colocar informações básicas da disciplina em repetir ocorrencias
+- [ ] esmaecer dias anteriores na timeline da home
+- [ ] Opções de repetição customizadas em adicionar novo
 - [ ] Exportar dados
 - [ ] Importar dados
-- [ ] menu de configurações (opções default de repetições, dark mode, etc)
 - [ ] Dark theme/mode
+- [ ] menu de configurações (opções default de repetições, dark mode, etc)
+- [ ] Visualização em formato de calendário
 - [ ] Testes unitários com Karma + Jasmine
 - [ ] Internacionalização com tradução para Inglês

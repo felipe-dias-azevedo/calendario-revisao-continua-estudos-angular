@@ -11,6 +11,21 @@
 </div>
 
 <mat-dialog-content>
+    <div class="repeat-subtitle">
+        <div class="repeat-subtitle-upper">
+            <h4>Disciplina: </h4>
+            <p>{{ subjectData.subject.name }}</p>
+        </div>
+        <div class="repeat-subtitle-upper">
+            <h4>Frente: </h4>
+            <p>{{ subjectData.subtopic.name }}</p>
+        </div>
+        <div class="repeat-subtitle-upper">
+            <h4>Matéria: </h4>
+            <p>{{ subjectData.materia.name }}</p>
+        </div>
+    </div>
+
     <table mat-table [dataSource]="subjectDates" class="day-table mat-elevation-z0">
 
         <ng-container matColumnDef="ammount">

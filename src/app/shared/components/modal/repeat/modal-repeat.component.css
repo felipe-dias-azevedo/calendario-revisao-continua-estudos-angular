@@ -2,6 +2,34 @@
     margin-left: 2rem;
 }
 
+.repeat-subtitle {
+    display: flex;
+    font-size: 12px;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem 0 1.5rem 0;
+}
+
+.repeat-subtitle-upper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-right: 4rem;
+    opacity: 0.6;
+}
+
+@media (max-width: 800px) {
+    .repeat-subtitle-upper {
+        margin-right: 2rem;
+    }
+}
+
+.repeat-subtitle p {
+    color: currentColor;
+}
+
 .day-table {
     width: 100%;
 }

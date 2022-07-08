@@ -11,6 +11,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ParentIdentifiableContext} from "../../../services/context-storage/identifiable-context";
 import {SubjectService} from "../../../services/subject/subject.service";
 import '../../../extensions/date.extensions';
+import {SubjectData} from "../../../models/subject-data";
+import {SubtopicService} from "../../../services/subtopic/subtopic.service";
+import {MateriaService} from "../../../services/materia/materia.service";
 
 @Component({
   selector: 'app-modal-repeat',
@@ -18,6 +21,8 @@ import '../../../extensions/date.extensions';
   styleUrls: ['./modal-repeat.component.css']
 })
 export class ModalRepeatComponent implements OnInit {
+
+  subjectData!: SubjectData;
 
   private subjects!: Subject[];
   subjectDates!: MatTableDataSource<SubjectDayRepeat>;
@@ -32,14 +37,24 @@ export class ModalRepeatComponent implements OnInit {
     private dialogRef: MatDialogRef<ModalRepeatComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ParentIdentifiableContext,
     private subjectService: SubjectService,
+    private subtopicService: SubtopicService,
+    private materiaService: MateriaService,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.anyDayAdded = false;
+
     this.subjects = this.subjectService.getByParentId(this.data.parentId);
     const actualSubjects = this.subjects.sort((a, b) => b.date.diffInDays(a.date));
+
+    this.subjectData = {
+      subject: actualSubjects[0],
+      materia: this.materiaService.getById(actualSubjects[0].materiaId)!,
+      subtopic: this.subtopicService.getById(actualSubjects[0].subtopicId)!
+    }
     this.firstDate = actualSubjects[0].date;
+
     const actualSubjectsDays: SubjectDayRepeat[] = actualSubjects.map(s => {
       return {
         idSubject: s.id,
@@ -89,9 +104,9 @@ export class ModalRepeatComponent implements OnInit {
   }
 
   removeDay(idSubject: string) {
-    console.log(idSubject);
     this.subjectDates.data = this.subjectDates.data.filter(s => s.idSubject !== idSubject);
     this.resetValidators();
+    this.anyDayAdded = true;
   }
 
   saveDays() {
