@@ -48,8 +48,17 @@
   border: 4px solid black;
 }
 
-h3 {
+.day-study-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 2rem;
   margin-right: 2rem;
+}
+
+.day-weekday {
+  font-size: 12px;
 }
 
 div.mat-chip-list-wrapper {

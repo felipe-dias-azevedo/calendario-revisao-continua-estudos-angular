@@ -4,7 +4,10 @@
     id="dia-{{ studyDay.day }}"
     class="study-day {{ isTodayStudyDay(studyDay.day) ? 'today-study-day' : '' }}"
   >
-    <h3>{{ studyDay.day }}</h3>
+    <div class="day-study-day">
+      <h3>{{ studyDay.day }}</h3>
+      <p class="day-weekday">{{ getWeekday(studyDay.day) }}</p>
+    </div>
     <mat-chip-list>
       <mat-chip
         class="force-font normalize-font subject"
