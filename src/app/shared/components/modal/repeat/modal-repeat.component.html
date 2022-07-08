@@ -16,11 +16,11 @@
             <h4>Disciplina: </h4>
             <p>{{ subjectData.subject.name }}</p>
         </div>
-        <div class="repeat-subtitle-upper">
+        <div class="repeat-subtitle-upper" *ngIf="subjectData.subtopic !== null">
             <h4>Frente: </h4>
             <p>{{ subjectData.subtopic.name }}</p>
         </div>
-        <div class="repeat-subtitle-upper">
+        <div class="repeat-subtitle-upper" *ngIf="subjectData.materia !== null">
             <h4>Matéria: </h4>
             <p>{{ subjectData.materia.name }}</p>
         </div>

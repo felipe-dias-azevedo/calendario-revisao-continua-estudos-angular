@@ -46,8 +46,8 @@ export class ModalUpdateSubjectComponent implements OnInit {
 
     this.formUpdateSubject = this.formBuilder.group({
       subjectName: [this.subject.name, [Validators.required, Validators.minLength(2)]],
-      subtopicId: [this.subtopic.id, [Validators.required, Validators.minLength(2)]],
-      materiaId: [this.materia.id, [Validators.required, Validators.minLength(2)]]
+      subtopicId: [this.subtopic?.id ?? null, [Validators.required, Validators.minLength(2)]],
+      materiaId: [this.materia?.id ?? null, [Validators.required, Validators.minLength(2)]]
     });
   }
 
@@ -59,6 +59,7 @@ export class ModalUpdateSubjectComponent implements OnInit {
   updateSubjects() {
     const { subjectName, materiaId, subtopicId } = this.formUpdateSubject.getRawValue() as FormUpdateSubjectModel;
 
+    // TODO: mudar para custom validator
     if (
       this.subject.name === subjectName &&
       this.subject.materiaId === materiaId &&

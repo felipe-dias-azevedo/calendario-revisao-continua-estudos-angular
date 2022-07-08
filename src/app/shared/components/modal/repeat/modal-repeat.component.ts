@@ -11,9 +11,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ParentIdentifiableContext} from "../../../services/context-storage/identifiable-context";
 import {SubjectService} from "../../../services/subject/subject.service";
 import '../../../extensions/date.extensions';
-import {SubjectData} from "../../../models/subject-data";
 import {SubtopicService} from "../../../services/subtopic/subtopic.service";
 import {MateriaService} from "../../../services/materia/materia.service";
+import {SubjectNullableData} from "../../../models/subject-nullable-data";
 
 @Component({
   selector: 'app-modal-repeat',
@@ -22,7 +22,7 @@ import {MateriaService} from "../../../services/materia/materia.service";
 })
 export class ModalRepeatComponent implements OnInit {
 
-  subjectData!: SubjectData;
+  subjectData!: SubjectNullableData;
 
   private subjects!: Subject[];
   subjectDates!: MatTableDataSource<SubjectDayRepeat>;
@@ -50,8 +50,8 @@ export class ModalRepeatComponent implements OnInit {
 
     this.subjectData = {
       subject: actualSubjects[0],
-      materia: this.materiaService.getById(actualSubjects[0].materiaId)!,
-      subtopic: this.subtopicService.getById(actualSubjects[0].subtopicId)!
+      materia: this.materiaService.getById(actualSubjects[0].materiaId),
+      subtopic: this.subtopicService.getById(actualSubjects[0].subtopicId)
     }
     this.firstDate = actualSubjects[0].date;
 
