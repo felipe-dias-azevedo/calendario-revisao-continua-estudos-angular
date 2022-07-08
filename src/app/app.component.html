@@ -68,14 +68,9 @@
     </mat-form-field>
   </div>
 </mat-toolbar>
-<main id="studies-day-list">
-  <div
-    *ngFor="let studyDay of subjectPerDayList"
-    app-studies-day-list
-    [day]="studyDay.day"
-    [subjectsToday]="studyDay.content"
-    (updateChildren)="updateData()"
-    id="dia-{{ studyDay.day }}"
-    class="study-day {{ isTodayStudyDay(studyDay.day) ? 'today-study-day' : '' }}"
-  ></div>
-</main>
+<app-studies-day-list
+  [actualDay]="now.getDate()"
+  [monthsForward]="monthsForward"
+  [subjectPerDayList]="subjectPerDayList"
+  (updateChildren)="updateData()"
+></app-studies-day-list>

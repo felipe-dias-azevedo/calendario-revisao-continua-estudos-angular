@@ -1,18 +1,19 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {StudyDayContent} from "./studies-day-list";
+import {StudiesDaysList, StudyDayContent} from "./studies-day-list";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalDetailsSubjectComponent} from "../modal/details-subject/modal-details-subject.component";
 
 @Component({
-  selector: '[app-studies-day-list]',
+  selector: 'app-studies-day-list',
   templateUrl: './studies-day-list.component.html',
   styleUrls: ['./studies-day-list.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class StudiesDayListComponent implements OnInit {
 
-  @Input() day!: number;
-  @Input() subjectsToday!: StudyDayContent[];
+  @Input() actualDay!: number;
+  @Input() monthsForward!: number;
+  @Input() subjectPerDayList!: StudiesDaysList;
   @Output("updateChildren") updateChildren: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
@@ -28,5 +29,9 @@ export class StudiesDayListComponent implements OnInit {
       panelClass: 'modal-container'
     });
     detailsDialog.afterClosed().subscribe(() => this.updateChildren.emit());
+  }
+
+  isTodayStudyDay(day: number): boolean {
+    return this.monthsForward === 0 && this.actualDay == day;
   }
 }

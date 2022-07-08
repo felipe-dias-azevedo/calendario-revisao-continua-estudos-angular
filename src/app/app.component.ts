@@ -13,7 +13,6 @@ import {getTextColorFrom} from "./shared/constants/colors";
 import { environment } from '../environments/environment';
 import {ModalAlertComponent} from "./shared/components/modal/alert/modal-alert.component";
 import {ModalAlertResponse} from "./shared/components/modal/alert/modal-alert-response";
-import {ModalRepeatComponent} from "./shared/components/modal/repeat/modal-repeat.component";
 
 @Component({
   selector: 'app-root',
@@ -24,8 +23,8 @@ export class AppComponent implements OnInit {
 
   title = 'calendario-estudos';
 
-  private now!: Date;
-  private monthsForward!: number;
+  now!: Date;
+  monthsForward!: number;
 
   subjectPerDayList!: StudiesDaysList;
   currentMonth!: string;
@@ -82,10 +81,6 @@ export class AppComponent implements OnInit {
     }
 
     this.subjectPerDayList = studiesDaysData.sort((a, b) => +a.day - +b.day);
-  }
-
-  isTodayStudyDay(day: number): boolean {
-    return this.monthsForward === 0 && this.now.getDate() == day;
   }
 
   goToTodayTitle(): void {

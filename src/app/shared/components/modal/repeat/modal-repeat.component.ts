@@ -26,6 +26,8 @@ export class ModalRepeatComponent implements OnInit {
 
   formNewDaysSubject!: FormGroup;
 
+  anyDayAdded!: boolean;
+
   constructor(
     private dialogRef: MatDialogRef<ModalRepeatComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ParentIdentifiableContext,
@@ -34,6 +36,7 @@ export class ModalRepeatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.anyDayAdded = false;
     this.subjects = this.subjectService.getByParentId(this.data.parentId);
     const actualSubjects = this.subjects.sort((a, b) => b.date.diffInDays(a.date));
     this.firstDate = actualSubjects[0].date;
@@ -82,6 +85,7 @@ export class ModalRepeatComponent implements OnInit {
 
     formSubjectElement.resetForm();
     this.resetData();
+    this.anyDayAdded = true;
   }
 
   removeDay(idSubject: string) {
@@ -105,6 +109,6 @@ export class ModalRepeatComponent implements OnInit {
     const days = newSubjects.map(s => s.ammount);
     this.subjectService.addInDays(subject, days);
 
-    this.dialogRef.close();
+    this.dialogRef.close({ confirm });
   }
 }

@@ -76,6 +76,7 @@
         mat-flat-button
         color="primary"
         (click)="saveDays()"
+        [disabled]="!anyDayAdded"
     >
         Salvar
     </button>

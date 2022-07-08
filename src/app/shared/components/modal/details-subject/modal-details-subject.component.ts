@@ -112,6 +112,12 @@ export class ModalDetailsSubjectComponent implements OnInit {
         parentId: this.subject.parentId
       }
     });
-    repeatDialog.afterClosed().subscribe(() => this.dialogRef.close());
+    repeatDialog.afterClosed().subscribe(result => {
+      if (result === undefined || !result.confirm) {
+        return;
+      }
+
+      this.dialogRef.close();
+    });
   }
 }

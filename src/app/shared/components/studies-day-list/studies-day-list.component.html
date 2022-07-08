@@ -1,12 +1,20 @@
-<h3>{{ day }}</h3>
-<mat-chip-list>
-  <mat-chip
-    class="force-font normalize-font subject"
-    *ngFor="let materia of subjectsToday"
-    (click)="showDetailsModal(materia.subject.id)"
-    [ngStyle]="{'background-color': materia.color, 'color': materia.textColor}"
-    matTooltip="Obter detalhes desta disciplina"
+<main id="studies-day-list">
+  <div
+    *ngFor="let studyDay of subjectPerDayList"
+    id="dia-{{ studyDay.day }}"
+    class="study-day {{ isTodayStudyDay(studyDay.day) ? 'today-study-day' : '' }}"
   >
-    {{ materia.subject.name }}
-  </mat-chip>
-</mat-chip-list>
+    <h3>{{ studyDay.day }}</h3>
+    <mat-chip-list>
+      <mat-chip
+        class="force-font normalize-font subject"
+        *ngFor="let materia of studyDay.content"
+        (click)="showDetailsModal(materia.subject.id)"
+        [ngStyle]="{'background-color': materia.color, 'color': materia.textColor}"
+        matTooltip="Obter detalhes desta disciplina"
+      >
+        {{ materia.subject.name }}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</main>

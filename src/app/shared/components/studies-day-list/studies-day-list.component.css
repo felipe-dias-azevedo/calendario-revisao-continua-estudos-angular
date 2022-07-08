@@ -1,3 +1,53 @@
+#studies-day-list {
+  margin: calc(10% + 1rem) 1.5rem 1.5rem;
+  padding-bottom: 1rem;
+  overflow-y: auto;
+}
+
+/* até 1000px de altura e 800px de largura */
+/* MOBILE */
+@media (max-height: 1000px) and (max-width: 800px) {
+  #studies-day-list {
+    margin-top: calc(100vh * 0.2 + 1.5rem);
+  }
+}
+
+/* depois de 1000px de altura e 800px de largura */
+/* MOBILE */
+@media (min-width: 801px) {
+  #studies-day-list {
+    margin-top: calc(100vh * 0.1 + 1.5rem);
+  }
+}
+
+.subject-container {
+  height: 100%;
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+}
+
+.study-day + .study-day {
+  margin: 1rem 0;
+}
+
+.study-day {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: lightgrey;
+  padding: 0 1rem;
+  border-radius: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.today-study-day {
+  border: 4px solid black;
+}
+
 h3 {
   margin-right: 2rem;
 }
