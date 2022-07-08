@@ -1,0 +1,31 @@
+.close-repeat {
+    margin-left: 2rem;
+}
+
+.day-table {
+    width: 100%;
+}
+
+.add-day-repeat-action {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.button-add-icon {
+    padding: 1rem;
+}
+
+.add-icon {
+    font-size: 2rem;
+}
+
+.mg-t-1 {
+    margin-top: 1rem;
+}
+
+.mg-r-2 {
+    margin-right: 2rem;
+}

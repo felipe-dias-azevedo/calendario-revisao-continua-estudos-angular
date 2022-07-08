@@ -1,0 +1,83 @@
+<div class="modal-header">
+    <h4 class="force-font">Repetir Ocorrências</h4>
+
+    <button
+        mat-icon-button
+        [mat-dialog-close]="true"
+        class="close-repeat"
+    >
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+    <table mat-table [dataSource]="subjectDates" class="day-table mat-elevation-z0">
+
+        <ng-container matColumnDef="ammount">
+            <th mat-header-cell *matHeaderCellDef style="width: 40%">Dia</th>
+            <td mat-cell class="normalize-font" *matCellDef="let element">
+                <h4>{{ element.ammount }}</h4>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef style="width: 50%">Data</th>
+            <td mat-cell class="normalize-font" *matCellDef="let element">
+                {{ element.date | date: 'dd/MM/yyyy' }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef style="width: 10%">Remover</th>
+            <td mat-cell class="normalize-font" *matCellDef="let element">
+                <button mat-icon-button color="warn" (click)="removeDay(element.idSubject)">
+                    <mat-icon>delete_outline</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['ammount', 'date', 'delete']; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['ammount', 'date', 'delete'];"></tr>
+    </table>
+
+    <form
+        #formDaysSubject="ngForm"
+        (ngSubmit)="addDay(formDaysSubject)"
+        [formGroup]="formNewDaysSubject"
+        class="add-day-repeat-action"
+    >
+        <mat-form-field class="normalize-font input-container mg-r-2" appearance="outline" hideRequiredMarker>
+            <mat-label>Nova repetição</mat-label>
+            <input
+                matInput
+                placeholder="Valor dia"
+                formControlName="newDayValue"
+                type="number"
+            />
+            <mat-hint>Dias após primeira repetição</mat-hint>
+            <mat-error *ngIf="formNewDaysSubject.invalid">Dia inválido</mat-error>
+        </mat-form-field>
+        <button
+            mat-mini-fab
+            color="accent"
+            class="mat-elevation-z0"
+            type="submit"
+            [disabled]="formNewDaysSubject.invalid"
+            matTooltip="Adicionar dia às repetições de ocorrências"
+            matTooltipPosition="below"
+        >
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="start">
+    <button
+        mat-flat-button
+        color="primary"
+        (click)="saveDays()"
+    >
+        Salvar
+    </button>
+    <button mat-flat-button [mat-dialog-close]="true">Cancelar</button>
+</mat-dialog-actions>

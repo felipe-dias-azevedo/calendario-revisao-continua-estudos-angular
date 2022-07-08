@@ -13,13 +13,17 @@ Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fon
 ### TODO:
 - [x] Deletar todas ocorrencias por ID pai (invés de nome)
 - [x] Formulario angular para validação na criação
-- [ ] Adicionar novas repetições para uma disciplina
+- [x] Adicionar novas repetições para uma disciplina
 - [x] Opção de resetar todos os dados (para desenvolvedor)
 - [x] Atualizar uma disciplina (todas as ocorrencias)
+- [ ] Especificar dia da semana escrito para cada dia na lista principal
+- [ ] colocar chips da principal sem scroll (height dinamico)
+- [ ] colocar informações básicas da disciplina em repetir ocorrencias
 - [ ] Opções de repetição customizadas
 - [ ] Visualização em formato de calendário
 - [ ] Exportar dados
 - [ ] Importar dados
-- [ ] Dark theme
+- [ ] menu de configurações (opções default de repetições, dark mode, etc)
+- [ ] Dark theme/mode
 - [ ] Testes unitários com Karma + Jasmine
 - [ ] Internacionalização com tradução para Inglês

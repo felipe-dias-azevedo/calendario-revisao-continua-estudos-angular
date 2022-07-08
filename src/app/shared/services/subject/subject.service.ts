@@ -22,7 +22,21 @@ export class SubjectService {
   }
 
   getById(id: string): Subject | null {
-    return this.contextStorageService.getById(this.key, id);
+    const subject = this.contextStorageService.getById(this.key, id);
+
+    if (subject === null) {
+      return null;
+    }
+
+    return {...subject, date: new Date(subject.date)};
+  }
+
+  getByParentId(parentId: string): Subject[] {
+     return this.contextStorageService.get(this.key)
+       .filter(s => s.parentId === parentId)
+       .map(s => {
+         return {...s, date: new Date(s.date)}
+       });
   }
 
   add(subject: PreSubject): void {

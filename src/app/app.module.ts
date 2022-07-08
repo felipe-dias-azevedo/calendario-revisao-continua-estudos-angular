@@ -28,6 +28,8 @@ import {MatChipsModule} from "@angular/material/chips";
 import { ModalUpdateSubjectComponent } from './shared/components/modal/update-subject/modal-update-subject.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatCardModule} from "@angular/material/card";
+import { ModalRepeatComponent } from './shared/components/modal/repeat/modal-repeat.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import {MatCardModule} from "@angular/material/card";
     ModalRemoveComponent,
     ModalAddComponent,
     ModalAlertComponent,
-    ModalUpdateSubjectComponent
+    ModalUpdateSubjectComponent,
+    ModalRepeatComponent
   ],
     imports: [
         BrowserModule,
@@ -65,7 +68,8 @@ import {MatCardModule} from "@angular/material/card";
         ReactiveFormsModule,
         MatChipsModule,
         MatMenuModule,
-        MatCardModule
+        MatCardModule,
+        MatTableModule
     ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }

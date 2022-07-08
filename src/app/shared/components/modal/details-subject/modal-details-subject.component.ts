@@ -11,6 +11,7 @@ import {MateriaService} from "../../../services/materia/materia.service";
 import {ModalAlertComponent} from "../alert/modal-alert.component";
 import {ModalAlertResponse} from "../alert/modal-alert-response";
 import {ModalUpdateSubjectComponent} from "../update-subject/modal-update-subject.component";
+import {ModalRepeatComponent} from "../repeat/modal-repeat.component";
 
 @Component({
   selector: 'app-modal-details-subject',
@@ -101,5 +102,16 @@ export class ModalDetailsSubjectComponent implements OnInit {
       }
     });
     updateDialog.afterClosed().subscribe(() => this.getData());
+  }
+
+  repeatSubject() {
+    const repeatDialog = this.dialog.open<ModalRepeatComponent, any, ModalAlertResponse>(ModalRepeatComponent, {
+      panelClass: 'modal-container',
+      data: {
+        id: this.subject.id,
+        parentId: this.subject.parentId
+      }
+    });
+    repeatDialog.afterClosed().subscribe(() => this.dialogRef.close());
   }
 }

@@ -6,6 +6,8 @@ declare global {
     addDays: (days: number) => Date;
     isSameDate: (date: Date) => boolean;
     daysInMonth: (month: number) => number;
+    diffInDays: (date: Date) => number;
+    daysTilYearEnd: () => number;
   }
 }
 
@@ -33,4 +35,20 @@ Date.prototype.isSameDate = function (date: Date) {
 Date.prototype.daysInMonth = function (month: number) {
   const date = this;
   return new Date(date.getFullYear(), month + 1, 0).getDate();
+}
+
+Date.prototype.diffInDays = function (date: Date) {
+  const thisDate = this;
+  const utc1 = Date.UTC(thisDate.getFullYear(), thisDate.getMonth(), thisDate.getDate());
+  const utc2 = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+
+  return Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24));
+}
+
+Date.prototype.daysTilYearEnd = function () {
+  const currentYear = new Date().getFullYear();
+  const yearEnd = new Date(currentYear, 11, 31);
+  const now = this;
+
+  return now.diffInDays(yearEnd);
 }

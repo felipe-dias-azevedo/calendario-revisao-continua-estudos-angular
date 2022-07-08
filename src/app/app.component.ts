@@ -13,6 +13,7 @@ import {getTextColorFrom} from "./shared/constants/colors";
 import { environment } from '../environments/environment';
 import {ModalAlertComponent} from "./shared/components/modal/alert/modal-alert.component";
 import {ModalAlertResponse} from "./shared/components/modal/alert/modal-alert-response";
+import {ModalRepeatComponent} from "./shared/components/modal/repeat/modal-repeat.component";
 
 @Component({
   selector: 'app-root',
