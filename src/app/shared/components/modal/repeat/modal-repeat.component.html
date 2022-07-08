@@ -91,7 +91,7 @@
         mat-flat-button
         color="primary"
         (click)="saveDays()"
-        [disabled]="!anyDayAdded"
+        [disabled]="!anyDayAdded || subjectDates.data.length <= 0"
     >
         Salvar
     </button>
