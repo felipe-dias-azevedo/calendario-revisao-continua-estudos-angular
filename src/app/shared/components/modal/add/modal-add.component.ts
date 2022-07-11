@@ -12,6 +12,7 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} fro
 import {FormMateriaModel} from "./form-materia-model";
 import {FormSubjectModel} from "./form-subject-model";
 import {FormSubtopicModel} from "./form-subtopic-model";
+import '../../../extensions/number.extensions';
 
 @Component({
   selector: 'app-modal-add',
@@ -24,6 +25,8 @@ export class ModalAddComponent implements OnInit {
   materias!: Materia[];
 
   formSubject!: FormGroup;
+  subjectDays!: number[];
+
   formSubtopic!: FormGroup;
   formMateria!: FormGroup;
 
@@ -41,6 +44,7 @@ export class ModalAddComponent implements OnInit {
   ngOnInit(): void {
     this.updateData();
 
+    this.subjectDays = [0, 7, 15, 30];
     this.tabType = ModalAddTabType.Subject;
 
     this.formSubject = this.formBuilder.group({
@@ -82,6 +86,17 @@ export class ModalAddComponent implements OnInit {
   changeTabType(event: MatTabChangeEvent) {
     this.tabType = event.index;
     this.updateData();
+  }
+
+  getDateAddedDay(day: number): Date {
+    const value = this.formSubject.get('dataInicio')?.value;
+
+    if (value === undefined || value === null) {
+      this.notify("Erro ao obter Data Início da Disciplina");
+      return new Date().addDays(day);
+    }
+
+    return value.clone().addDays(day);
   }
 
   saveMateria(formMateriaElement: FormGroupDirective) {

@@ -68,6 +68,13 @@
             <mat-datepicker touchUi [disabled]="false" #picker></mat-datepicker>
             <mat-error *ngIf="formSubject.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
+
+          <mat-list>
+            <mat-list-item *ngFor="let day of subjectDays">
+              <h4 mat-line class="normalize-font">{{ day }}</h4>
+              <p class="normalize-font">{{ getDateAddedDay(day) | date: 'dd/MM/yyyy' }}</p>
+            </mat-list-item>
+          </mat-list>
         </form>
       </ng-template>
     </mat-tab>
@@ -133,6 +140,13 @@
     [disabled]="formSubject.invalid"
   >
     Salvar
+  </button>
+  <button
+    mat-flat-button
+    color="accent"
+    *ngIf="tabType.valueOf() === 0"
+  >
+    Alterar Repetições
   </button>
   <button
     mat-flat-button
