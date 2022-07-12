@@ -69,12 +69,28 @@
             <mat-error *ngIf="formSubject.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
 
-          <mat-list>
-            <mat-list-item *ngFor="let day of subjectDays">
-              <h4 mat-line class="normalize-font">{{ day }}</h4>
-              <p class="normalize-font">{{ getDateAddedDay(day) | date: 'dd/MM/yyyy' }}</p>
-            </mat-list-item>
-          </mat-list>
+          <mat-card class="mat-elevation-z0 repeat-margin outline">
+            <mat-card-subtitle>
+              Repetições
+            </mat-card-subtitle>
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item *ngFor="let day of subjectDays; let last = last">
+                  <h4 mat-line 
+                    class="normalize-font" 
+                    style="margin-bottom: 4px; font-weight: 500;"
+                  >
+                    Dia {{ day }}
+                  </h4>
+                  <p mat-line class="normalize-font">{{ getDateAddedDay(day) | date: 'dd/MM/yyyy' }}</p>
+                  <p class="normalize-font longdate-wide">{{ getDateAddedDay(day) | date: 'EEEE, d MMMM' }}</p>
+                  <p class="normalize-font longdate-short">{{ getDateAddedDay(day) | date: 'E, d MMM' }}</p>
+                  <mat-divider *ngIf="!last"></mat-divider>
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </mat-card>
+          
         </form>
       </ng-template>
     </mat-tab>

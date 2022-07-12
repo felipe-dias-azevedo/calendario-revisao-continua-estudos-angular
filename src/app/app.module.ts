@@ -30,6 +30,10 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatCardModule} from "@angular/material/card";
 import { ModalRepeatComponent } from './shared/components/modal/repeat/modal-repeat.component';
 import {MatTableModule} from "@angular/material/table";
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+
+registerLocaleData(localePT);
 
 @NgModule({
   declarations: [
@@ -72,7 +76,8 @@ import {MatTableModule} from "@angular/material/table";
         MatTableModule
     ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: LOCALE_ID, useValue: 'pt-br' }
   ],
   bootstrap: [AppComponent]
 })

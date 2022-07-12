@@ -13,6 +13,7 @@ import {FormMateriaModel} from "./form-materia-model";
 import {FormSubjectModel} from "./form-subject-model";
 import {FormSubtopicModel} from "./form-subtopic-model";
 import '../../../extensions/number.extensions';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-modal-add',
@@ -89,7 +90,7 @@ export class ModalAddComponent implements OnInit {
   }
 
   getDateAddedDay(day: number): Date {
-    const value = this.formSubject.get('dataInicio')?.value;
+    const value = this.formSubject.get('dataInicio')?.value as Date;
 
     if (value === undefined || value === null) {
       this.notify("Erro ao obter Data Início da Disciplina");

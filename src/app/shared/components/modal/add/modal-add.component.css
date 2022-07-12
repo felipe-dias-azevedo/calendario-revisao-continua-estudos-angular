@@ -2,3 +2,39 @@
 .force-color {
     color: currentColor;
 }
+
+.repeat-margin {
+    margin: 1rem 0 2rem 0;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.outline {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0,0,0,.12);
+}
+
+.longdate-wide {
+    display: block;
+}
+
+.longdate-short {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .longdate-wide {
+        display: none;
+    }
+    
+    .longdate-short {
+        display: block;
+    }
+}
+
+.mg-b-8 {
+    margin-bottom: 8px;
+}
