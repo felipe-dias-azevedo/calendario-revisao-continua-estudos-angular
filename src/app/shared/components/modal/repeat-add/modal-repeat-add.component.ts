@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { SubjectDayRepeat } from '../../../models/subject-day-repeat';
 import { AddSubjectDayRepeat } from './add-subject-day-repeat';
 import { isTilYearEnd } from '../../../validators/numbers.validators';
 import { isSubjectDayRepeated } from '../../../validators/subjects.validators';

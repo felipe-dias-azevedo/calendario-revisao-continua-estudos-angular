@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {months} from "./shared/constants/months";
 import {SubtopicService} from "./shared/services/subtopic/subtopic.service";
 import {SubjectService} from "./shared/services/subject/subject.service";
 import {MateriaService} from "./shared/services/materia/materia.service";

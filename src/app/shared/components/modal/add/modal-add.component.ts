@@ -1,23 +1,21 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubjectService} from "../../../services/subject/subject.service";
 import {SubtopicService} from "../../../services/subtopic/subtopic.service";
 import {MateriaService} from "../../../services/materia/materia.service";
 import {Subtopic} from "../../../services/subtopic/subtopic";
 import {Materia} from "../../../services/materia/materia";
 import {ModalAddTabType} from "./modal-add-tab-type";
-import {NewSubject, Subject} from "../../../services/subject/subject";
+import {NewSubject} from "../../../services/subject/subject";
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import {NotifyService} from "../../../services/notify/notify.service";
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {FormMateriaModel} from "./form-materia-model";
 import {FormSubjectModel} from "./form-subject-model";
 import {FormSubtopicModel} from "./form-subtopic-model";
 import '../../../extensions/number.extensions';
-import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalRepeatAddComponent } from '../repeat-add/modal-repeat-add.component';
 import { ModalRepeatAddResponse } from '../repeat-add/modal-repeat-add-response';
-import { AddSubjectDayRepeat } from '../repeat-add/add-subject-day-repeat';
 import { ModalRepeatAddModel } from '../repeat-add/modal-repeat-add-model';
 
 @Component({
