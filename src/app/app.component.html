@@ -10,7 +10,7 @@
     </button>
     <div class="month-title">
       <h1 class="force-font" (click)="goToTodayTitle()">
-        {{ currentMonth }}
+        {{ (currentMonth | date: 'LLLL')?.toCapitalizeCase() }}
       </h1>
     </div>
     <button

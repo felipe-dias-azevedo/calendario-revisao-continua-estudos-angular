@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {months} from "./shared/constants/months";
 import {SubtopicService} from "./shared/services/subtopic/subtopic.service";
 import {SubjectService} from "./shared/services/subject/subject.service";
 import {MateriaService} from "./shared/services/materia/materia.service";
@@ -9,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ModalAddComponent} from "./shared/components/modal/add/modal-add.component";
 import {ModalRemoveComponent} from "./shared/components/modal/remove/modal-remove.component";
 import './shared/extensions/date.extensions';
+import './shared/extensions/string.extensions';
 import {getTextColorFrom} from "./shared/constants/colors";
 import { environment } from '../environments/environment';
 import {ModalAlertComponent} from "./shared/components/modal/alert/modal-alert.component";
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   monthsForward!: number;
 
   subjectPerDayList!: StudiesDaysList;
-  currentMonth!: string;
+  currentMonth!: Date;
   textFilter!: string;
 
   isDev = !environment.production;
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
 
   private updateMonth() {
     const actualMonth = this.now.getMonth() + this.monthsForward;
-    this.currentMonth = months[actualMonth];
+    this.currentMonth = this.now.getDateOfMonth(this.monthsForward);
 
     let studiesDaysData: StudiesDaysList = [];
     const subjects = this.subjectService.get();

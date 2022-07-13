@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {NewSubject, Subject} from "../../../services/subject/subject";
-import {SubjectDayRepeat} from "./subject-day-repeat";
+import {SubjectDayRepeat} from "../../../models/subject-day-repeat";
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {isTilYearEnd} from "../../../validators/numbers.validators";
 import {isSubjectDayRepeated} from "../../../validators/subjects.validators";
-import {SubjectDayRepeatValue} from "./subject-day-repeat-value";
+import {SubjectDayRepeatValue} from "../../../models/subject-day-repeat-value";
 import {v4 as uuid} from "uuid";
 import {MatTableDataSource} from "@angular/material/table";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";

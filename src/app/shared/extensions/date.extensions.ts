@@ -8,6 +8,7 @@ declare global {
     daysInMonth: (month: number) => number;
     diffInDays: (date: Date) => number;
     daysTilYearEnd: () => number;
+    getDateOfMonth: (month: number) => Date;
   }
 }
 
@@ -51,4 +52,12 @@ Date.prototype.daysTilYearEnd = function () {
   const now = this;
 
   return now.diffInDays(yearEnd);
+}
+
+Date.prototype.getDateOfMonth = function (month: number) {
+  let date = this.clone();
+  const actualMonth = date.getMonth() + month;
+  date.setMonth(actualMonth);
+  
+  return date;
 }

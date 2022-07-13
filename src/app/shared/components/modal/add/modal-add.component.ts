@@ -1,17 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubjectService} from "../../../services/subject/subject.service";
 import {SubtopicService} from "../../../services/subtopic/subtopic.service";
 import {MateriaService} from "../../../services/materia/materia.service";
 import {Subtopic} from "../../../services/subtopic/subtopic";
 import {Materia} from "../../../services/materia/materia";
 import {ModalAddTabType} from "./modal-add-tab-type";
-import {NewSubject, Subject} from "../../../services/subject/subject";
+import {NewSubject} from "../../../services/subject/subject";
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import {NotifyService} from "../../../services/notify/notify.service";
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {FormMateriaModel} from "./form-materia-model";
 import {FormSubjectModel} from "./form-subject-model";
 import {FormSubtopicModel} from "./form-subtopic-model";
+import '../../../extensions/number.extensions';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalRepeatAddComponent } from '../repeat-add/modal-repeat-add.component';
+import { ModalRepeatAddResponse } from '../repeat-add/modal-repeat-add-response';
+import { ModalRepeatAddModel } from '../repeat-add/modal-repeat-add-model';
 
 @Component({
   selector: 'app-modal-add',
@@ -24,6 +29,8 @@ export class ModalAddComponent implements OnInit {
   materias!: Materia[];
 
   formSubject!: FormGroup;
+  subjectDays!: number[];
+
   formSubtopic!: FormGroup;
   formMateria!: FormGroup;
 
@@ -34,13 +41,15 @@ export class ModalAddComponent implements OnInit {
     private subjectService: SubjectService,
     private subtopicService: SubtopicService,
     private materiaService: MateriaService,
-    private notifyService: NotifyService
+    private notifyService: NotifyService,
+    private dialog: MatDialog
   ) { }
 
 
   ngOnInit(): void {
     this.updateData();
 
+    this.subjectDays = [0, 7, 15, 30];
     this.tabType = ModalAddTabType.Subject;
 
     this.formSubject = this.formBuilder.group({
@@ -84,6 +93,17 @@ export class ModalAddComponent implements OnInit {
     this.updateData();
   }
 
+  getDateAddedDay(day: number): Date {
+    const value = this.formSubject.get('dataInicio')?.value as Date;
+
+    if (value === undefined || value === null) {
+      this.notify("Erro ao obter Data Início da Disciplina");
+      return new Date().addDays(day);
+    }
+
+    return value.clone().addDays(day);
+  }
+
   saveMateria(formMateriaElement: FormGroupDirective) {
     const { materiaName, materiaColor } = this.formMateria.getRawValue() as FormMateriaModel;
 
@@ -108,7 +128,7 @@ export class ModalAddComponent implements OnInit {
       date: dataInicio
     };
 
-    const daysToAdd = [0,7,15,30];
+    const daysToAdd = this.subjectDays;
 
     this.subjectService.addInDays(subject, daysToAdd);
 
@@ -116,6 +136,24 @@ export class ModalAddComponent implements OnInit {
 
     formSubjectElement.resetForm();
     this.resetValues();
+  }
+
+  updateSubjectRepeats() {
+    const daysToAdd: ModalRepeatAddModel = {
+      ammounts: this.subjectDays,
+      firstDate: this.getDateAddedDay(0),
+    };
+    const repeatDialog = this.dialog.open<ModalRepeatAddComponent, any, ModalRepeatAddResponse>(ModalRepeatAddComponent, {
+      panelClass: 'modal-container',
+      data: daysToAdd
+    });
+    repeatDialog.afterClosed().subscribe(result => {
+      if (result === undefined || !result.confirm || result.days === undefined || result.days.length === 0) {
+        return;
+      }
+
+      this.subjectDays = result.days;
+    });
   }
 
   saveSubtopic(formSubtopicElement: FormGroupDirective) {
