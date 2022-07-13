@@ -14,6 +14,11 @@ import {FormSubjectModel} from "./form-subject-model";
 import {FormSubtopicModel} from "./form-subtopic-model";
 import '../../../extensions/number.extensions';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalRepeatAddComponent } from '../repeat-add/modal-repeat-add.component';
+import { ModalRepeatAddResponse } from '../repeat-add/modal-repeat-add-response';
+import { AddSubjectDayRepeat } from '../repeat-add/add-subject-day-repeat';
+import { ModalRepeatAddModel } from '../repeat-add/modal-repeat-add-model';
 
 @Component({
   selector: 'app-modal-add',
@@ -38,7 +43,8 @@ export class ModalAddComponent implements OnInit {
     private subjectService: SubjectService,
     private subtopicService: SubtopicService,
     private materiaService: MateriaService,
-    private notifyService: NotifyService
+    private notifyService: NotifyService,
+    private dialog: MatDialog
   ) { }
 
 
@@ -124,7 +130,7 @@ export class ModalAddComponent implements OnInit {
       date: dataInicio
     };
 
-    const daysToAdd = [0,7,15,30];
+    const daysToAdd = this.subjectDays;
 
     this.subjectService.addInDays(subject, daysToAdd);
 
@@ -132,6 +138,24 @@ export class ModalAddComponent implements OnInit {
 
     formSubjectElement.resetForm();
     this.resetValues();
+  }
+
+  updateSubjectRepeats() {
+    const daysToAdd: ModalRepeatAddModel = {
+      ammounts: this.subjectDays,
+      firstDate: this.getDateAddedDay(0),
+    };
+    const repeatDialog = this.dialog.open<ModalRepeatAddComponent, any, ModalRepeatAddResponse>(ModalRepeatAddComponent, {
+      panelClass: 'modal-container',
+      data: daysToAdd
+    });
+    repeatDialog.afterClosed().subscribe(result => {
+      if (result === undefined || !result.confirm || result.days === undefined || result.days.length === 0) {
+        return;
+      }
+
+      this.subjectDays = result.days;
+    });
   }
 
   saveSubtopic(formSubtopicElement: FormGroupDirective) {

@@ -160,6 +160,7 @@
   <button
     mat-flat-button
     color="accent"
+    (click)="updateSubjectRepeats()"
     *ngIf="tabType.valueOf() === 0"
   >
     Alterar Repetições

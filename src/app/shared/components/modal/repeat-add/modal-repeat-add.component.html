@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="force-font">Repetir Ocorrências</h4>
+    <h4 class="force-font">Alterar Repetições de Ocorrências</h4>
 
     <button
         mat-icon-button
@@ -12,16 +12,8 @@
 
 <div class="repeat-subtitle">
     <div class="repeat-subtitle-upper">
-        <h4>Disciplina: </h4>
-        <p>{{ subjectData.subject.name }}</p>
-    </div>
-    <div class="repeat-subtitle-upper" *ngIf="subjectData.subtopic !== null">
-        <h4>Frente: </h4>
-        <p>{{ subjectData.subtopic.name }}</p>
-    </div>
-    <div class="repeat-subtitle-upper" *ngIf="subjectData.materia !== null">
-        <h4>Matéria: </h4>
-        <p>{{ subjectData.materia.name }}</p>
+        <h4>Data Início: </h4>
+        <p>{{ firstDate | date: 'EEEE, d MMMM' }}</p>
     </div>
 </div>
 
@@ -45,7 +37,7 @@
         <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef style="width: 10%">Remover</th>
             <td mat-cell class="normalize-font" *matCellDef="let element">
-                <button mat-icon-button color="warn" (click)="removeDay(element.idSubject)">
+                <button mat-icon-button color="warn" (click)="removeDay(element.ammount)">
                     <mat-icon>delete_outline</mat-icon>
                 </button>
             </td>
