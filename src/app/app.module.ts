@@ -33,6 +33,7 @@ import {MatTableModule} from "@angular/material/table";
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { ModalRepeatAddComponent } from './shared/components/modal/repeat-add/modal-repeat-add.component';
+import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
 
 registerLocaleData(localePT);
 
@@ -46,7 +47,8 @@ registerLocaleData(localePT);
     ModalAlertComponent,
     ModalUpdateSubjectComponent,
     ModalRepeatComponent,
-    ModalRepeatAddComponent
+    ModalRepeatAddComponent,
+    ModalImportExportComponent
   ],
     imports: [
         BrowserModule,

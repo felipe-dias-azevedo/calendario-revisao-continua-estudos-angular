@@ -13,6 +13,7 @@ import {getTextColorFrom} from "./shared/constants/colors";
 import { environment } from '../environments/environment';
 import {ModalAlertComponent} from "./shared/components/modal/alert/modal-alert.component";
 import {ModalAlertResponse} from "./shared/components/modal/alert/modal-alert-response";
+import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
 
 @Component({
   selector: 'app-root',
@@ -142,6 +143,12 @@ export class AppComponent implements OnInit {
     const modalAdd = this.dialog.open(ModalAddComponent, { panelClass: 'modal-container' });
 
     modalAdd.afterClosed().subscribe(() => this.updateMonth());
+  }
+
+  openImportExport() {
+    const modalImportExport = this.dialog.open(ModalImportExportComponent);
+
+    modalImportExport.afterClosed().subscribe(() => this.updateMonth());
   }
 
   resetData() {
