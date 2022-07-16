@@ -143,7 +143,7 @@ export class ModalAddComponent implements OnInit {
       ammounts: this.subjectDays,
       firstDate: this.getDateAddedDay(0),
     };
-    const repeatDialog = this.dialog.open<ModalRepeatAddComponent, any, ModalRepeatAddResponse>(ModalRepeatAddComponent, {
+    const repeatDialog = this.dialog.open<ModalRepeatAddComponent, ModalRepeatAddModel, ModalRepeatAddResponse>(ModalRepeatAddComponent, {
       panelClass: 'modal-container',
       data: daysToAdd
     });

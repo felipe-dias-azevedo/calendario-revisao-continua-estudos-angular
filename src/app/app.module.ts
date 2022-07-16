@@ -35,6 +35,7 @@ import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { ModalRepeatAddComponent } from './shared/components/modal/repeat-add/modal-repeat-add.component';
 import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
+import { ModalImportTableComponent } from './shared/components/modal/import-table/modal-import-table.component';
 
 registerLocaleData(localePT);
 
@@ -49,7 +50,8 @@ registerLocaleData(localePT);
     ModalUpdateSubjectComponent,
     ModalRepeatComponent,
     ModalRepeatAddComponent,
-    ModalImportExportComponent
+    ModalImportExportComponent,
+    ModalImportTableComponent
   ],
     imports: [
         BrowserModule,

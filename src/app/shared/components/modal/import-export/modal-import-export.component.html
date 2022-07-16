@@ -36,7 +36,7 @@
               class="mat-elevation-z1 mg-l-1"
               color="primary" 
               (click)="uploadData()"
-              [disabled]="!fileName"
+              [disabled]="!fileName || importLoading"
               matTooltip="Salvar dados do arquivo"
               matTooltipPosition="below"
             >

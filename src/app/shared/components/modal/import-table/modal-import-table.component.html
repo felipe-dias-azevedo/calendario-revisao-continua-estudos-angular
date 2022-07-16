@@ -1,0 +1,103 @@
+<div class="modal-header">
+    <h4 class="force-font">Revisão Dados Importar</h4>
+
+    <button
+        mat-icon-button
+        [mat-dialog-close]="undefined"
+    >
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+    <mat-card class="mat-elevation-z0 outline mg-tb-2" *ngIf="subjects.data.length > 0">
+        <mat-card-title class="normalize-font">
+            Disciplinas
+        </mat-card-title>
+        <mat-card-content>
+
+            <table mat-table [dataSource]="subjects" class="full-width mat-elevation-z0">
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef style="width: 50%">Nome</th>
+                    <td mat-cell class="normalize-font" *matCellDef="let element">
+                        {{ element.name }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef style="width: 50%">Data</th>
+                    <td mat-cell class="normalize-font" *matCellDef="let element">
+                        {{ element.date | date: 'dd/MM/yyyy' }}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['name', 'date']; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['name', 'date'];"></tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="mat-elevation-z0 outline mg-tb-2" *ngIf="subtopics.data.length > 0">
+        <mat-card-title class="normalize-font">
+            Frentes
+        </mat-card-title>
+        <mat-card-content>
+
+            <table mat-table [dataSource]="subtopics" class="full-width mat-elevation-z0">
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef style="width: 100%">Nome</th>
+                    <td mat-cell class="normalize-font" *matCellDef="let element">
+                        {{ element.name }}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['name']; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['name'];"></tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="mat-elevation-z0 outline mg-tb-2" *ngIf="materias.data.length > 0">
+        <mat-card-title class="normalize-font">
+            Matérias
+        </mat-card-title>
+        <mat-card-content>
+
+            <table mat-table [dataSource]="materias" class="full-width mat-elevation-z0">
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef style="width: 50%">Nome</th>
+                    <td mat-cell class="normalize-font" *matCellDef="let element">
+                        {{ element.name }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="color">
+                    <th mat-header-cell *matHeaderCellDef style="width: 50%">Cor</th>
+                    <td mat-cell class="normalize-font" *matCellDef="let element">
+                        <mat-chip [ngStyle]="{'background-color': element.color, 'color': getTextColorFrom(element.color)}">
+                            {{ element.color.toUpperCase() }}
+                        </mat-chip>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['name', 'color']; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['name', 'color'];"></tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button
+        mat-flat-button
+        color="primary"
+        (click)="save()"
+    >
+        Salvar
+    </button>
+    <button mat-flat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

@@ -1,6 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FileData } from 'src/app/shared/models/file-data';
+import {FileData, FileDataFormated} from 'src/app/shared/models/file-data';
 import { NotifyService } from 'src/app/shared/services/notify/notify.service';
+import {BackupService} from "../../../services/backup/backup.service";
+import {map} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalImportTableComponent} from "../import-table/modal-import-table.component";
+import {SubjectService} from "../../../services/subject/subject.service";
+import {SubtopicService} from "../../../services/subtopic/subtopic.service";
+import {MateriaService} from "../../../services/materia/materia.service";
 
 @Component({
   selector: 'app-modal-import-export',
@@ -18,7 +25,12 @@ export class ModalImportExportComponent implements OnInit {
   importLoading!: boolean;
 
   constructor(
-    private notifyService: NotifyService
+    private backupService: BackupService,
+    private subjectService: SubjectService,
+    private subtopicService: SubtopicService,
+    private materiaService: MateriaService,
+    private notifyService: NotifyService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -63,13 +75,13 @@ export class ModalImportExportComponent implements OnInit {
 
         this.fileContent = reader.result as string;
 
-        if (this.fileContent?.trim() === '') {
+        if (this.fileContent === undefined || this.fileContent?.trim() === '') {
           this.notifyService.show('O arquivo está vázio');
           this.resetData();
           return;
         }
   
-        this.importData = JSON.parse(this.fileContent!) as FileData;
+        this.importData = this.backupService.getData(this.fileContent);
   
         this.importLoading = false;
       }
@@ -85,17 +97,39 @@ export class ModalImportExportComponent implements OnInit {
 
   uploadData() {
     const data = this.importData!;
-    if (data.materias.length > 0) {
+    this.importLoading = true;
 
+    const materias = this.backupService.formatMateriaData(data.materias);
+    const subtopics = this.backupService.formatSubtopicData(data.subtopics);
+    const subjects = this.backupService.formatSubjectData(data.subjects, materias, subtopics);
+
+    if (materias.length === 0 && subtopics.length === 0 && subjects.length === 0) {
+      this.notifyService.show('Dados estão vazios');
+      this.resetData();
+      return;
     }
 
-    if (data.subtopics.length > 0) {
+    const importTableDialog = this.dialog.open<ModalImportTableComponent, FileDataFormated, FileDataFormated>(ModalImportTableComponent, {
+      panelClass: 'modal-container',
+      data: {
+        subjects,
+        materias,
+        subtopics
+      }
+    });
+    importTableDialog.afterClosed().subscribe(result => {
+      if (result === undefined) {
+        this.importLoading = false;
+        return;
+      }
 
-    }
+      result.materias.forEach(m => this.materiaService.add(m));
+      result.subtopics.forEach(s => this.subtopicService.add(s));
+      result.subjects.forEach(s => this.subjectService.add(s));
 
-    if (data.subjects.length > 0) {
-      
-    }
+      this.notifyService.show('Dados importados com sucesso!');
+      this.resetData();
+    });
   }
 
   downloadData() {

@@ -1,0 +1,14 @@
+
+.full-width {
+    width: 100%;
+}
+
+.outline {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0,0,0,.12);
+}
+
+.mg-tb-2 {
+    margin: 2rem 0;
+}

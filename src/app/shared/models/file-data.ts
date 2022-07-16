@@ -1,3 +1,7 @@
+import {Subject} from "../services/subject/subject";
+import {Materia} from "../services/materia/materia";
+import {Subtopic} from "../services/subtopic/subtopic";
+
 export interface FileData {
     subjects: FileSubjectData[];
     materias: FileMateriaData[];
@@ -19,4 +23,10 @@ export interface FileMateriaData {
 
 export interface FileSubtopicData {
     subtopic: string;
+}
+
+export interface FileDataFormated {
+    subjects: Subject[];
+    materias: Materia[];
+    subtopics: Subtopic[];
 }

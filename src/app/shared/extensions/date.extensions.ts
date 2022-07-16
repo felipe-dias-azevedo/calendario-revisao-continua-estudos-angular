@@ -4,6 +4,7 @@ declare global {
   interface Date {
     clone: () => Date;
     addDays: (days: number) => Date;
+    addHours: (hours: number) => Date;
     isSameDate: (date: Date) => boolean;
     daysInMonth: (month: number) => number;
     diffInDays: (date: Date) => number;
@@ -22,6 +23,16 @@ Date.prototype.addDays = function (days: number) {
   }
   const date = this;
   date.setDate(date.getDate() + days);
+
+  return date;
+}
+
+Date.prototype.addHours = function (hours: number) {
+  if (!hours) {
+    return this;
+  }
+  const date = this;
+  date.setUTCHours(date.getHours() + hours);
 
   return date;
 }
