@@ -147,7 +147,9 @@ export class AppComponent implements OnInit {
   }
 
   openImportExport() {
-    const modalImportExport = this.dialog.open(ModalImportExportComponent);
+    const modalImportExport = this.dialog.open(ModalImportExportComponent, {
+      panelClass: 'mini-modal-container'
+    });
 
     modalImportExport.afterClosed().subscribe(() => this.updateMonth());
   }

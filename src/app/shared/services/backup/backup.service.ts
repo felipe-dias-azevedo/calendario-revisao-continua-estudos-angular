@@ -16,10 +16,17 @@ export class BackupService {
   isOldBackup(content: string): boolean {
     try {
       const value = JSON.parse(content) as FileData;
-      return value !== undefined;
+      const isOld = this.isOldBackupType(value);
+      return value !== undefined && isOld;
     } catch (error) {
       return false;
     }
+  }
+
+  private isOldBackupType(object: FileData): object is FileData {
+    return object.materias.filter(m => m.materia !== undefined).length === object.materias.length &&
+        object.subtopics.filter(m => m.subtopic !== undefined).length === object.subtopics.length &&
+        object.subjects.filter(m => m.subject !== undefined).length === object.subjects.length;
   }
 
   getData(content: string): FileData {
@@ -81,5 +88,21 @@ export class BackupService {
     }
 
     return data;
+  }
+
+  generateDownloadFile(materias: Materia[], subtopics: Subtopic[], subjects: Subject[]): string {
+    const data = {
+      materias,
+      subtopics,
+      subjects
+    }
+
+    return JSON.stringify(data);
+  }
+
+  getDownloadFileName(): string {
+    const now = new Date();
+    const date = now.toISOString().split('T')[0];
+    return `dados-calendario-revisao-estudos-v2-${date}.json`;
   }
 }

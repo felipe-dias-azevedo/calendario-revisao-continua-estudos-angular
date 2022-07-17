@@ -36,7 +36,7 @@
               class="mat-elevation-z1 mg-l-1"
               color="primary" 
               (click)="uploadData()"
-              [disabled]="!fileName || importLoading"
+              [disabled]="!importFileName || importLoading"
               matTooltip="Salvar dados do arquivo"
               matTooltipPosition="below"
             >
@@ -47,8 +47,8 @@
           <div class="loader-holder mg-t-1" *ngIf="importLoading">
             <mat-spinner [diameter]="36"></mat-spinner>
           </div>
-          <p class="normalize-font mg-t-1 filename-holder" *ngIf="fileName">
-            {{ fileName }}
+          <p class="normalize-font mg-t-1 filename-holder" *ngIf="importFileName">
+            {{ importFileName }}
           </p>
         </div>
       </ng-template>

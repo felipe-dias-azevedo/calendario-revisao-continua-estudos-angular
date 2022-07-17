@@ -1,13 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FileData, FileDataFormated} from 'src/app/shared/models/file-data';
 import { NotifyService } from 'src/app/shared/services/notify/notify.service';
 import {BackupService} from "../../../services/backup/backup.service";
-import {map} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalImportTableComponent} from "../import-table/modal-import-table.component";
 import {SubjectService} from "../../../services/subject/subject.service";
 import {SubtopicService} from "../../../services/subtopic/subtopic.service";
 import {MateriaService} from "../../../services/materia/materia.service";
+import { saveAs } from "file-saver";
 
 @Component({
   selector: 'app-modal-import-export',
@@ -16,10 +16,9 @@ import {MateriaService} from "../../../services/materia/materia.service";
 })
 export class ModalImportExportComponent implements OnInit {
 
-  @ViewChild('uploadInput') uploadInput!: ElementRef;
-
-  fileName?: string;
-  private fileContent?: string;
+  // IMPORT DATA
+  importFileName?: string;
+  private importFileContent?: string;
   private importData?: FileData;
 
   importLoading!: boolean;
@@ -38,8 +37,8 @@ export class ModalImportExportComponent implements OnInit {
   }
 
   private resetData() {
-    this.fileName = undefined;
-    this.fileContent = undefined;
+    this.importFileName = undefined;
+    this.importFileContent = undefined;
     this.importData = undefined;
     this.importLoading = false;
   }
@@ -68,20 +67,26 @@ export class ModalImportExportComponent implements OnInit {
         return;
       }
       
-      this.fileName = file.name;
+      this.importFileName = file.name;
 
       let reader = new FileReader();
       reader.onload = () => {
 
-        this.fileContent = reader.result as string;
+        this.importFileContent = reader.result as string;
 
-        if (this.fileContent === undefined || this.fileContent?.trim() === '') {
+        if (this.importFileContent === undefined || this.importFileContent?.trim() === '') {
           this.notifyService.show('O arquivo está vázio');
           this.resetData();
           return;
         }
+
+        if (!this.backupService.isOldBackup(this.importFileContent)) {
+          this.notifyService.show('Os dados não são compatíveis');
+          this.resetData();
+          return;
+        }
   
-        this.importData = this.backupService.getData(this.fileContent);
+        this.importData = this.backupService.getData(this.importFileContent);
   
         this.importLoading = false;
       }
@@ -133,6 +138,14 @@ export class ModalImportExportComponent implements OnInit {
   }
 
   downloadData() {
-    
+    const materias = this.materiaService.get();
+    const subtopics = this.subtopicService.get();
+    const subjects = this.subjectService.get();
+
+    const data = this.backupService.generateDownloadFile(materias, subtopics, subjects);
+    const fileName = this.backupService.getDownloadFileName();
+
+    const content = new Blob([data], { type: 'text/json' });
+    saveAs(content, fileName);
   }
 }
