@@ -9,6 +9,7 @@ import {ModalRemoveTabType} from "./modal-remove-tab-type";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalAlertComponent} from "../alert/modal-alert.component";
 import {ModalAlertResponse} from "../alert/modal-alert-response";
+import {ModalAlertTypeContent} from "../alert/modal-alert-type-content";
 
 @Component({
   selector: 'app-modal-remove',
@@ -64,7 +65,7 @@ export class ModalRemoveComponent implements OnInit {
 
     const subtopic = this.subtopicService.getById(this.subtopicId)!;
 
-    const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
+    const confirmationDialog = this.dialog.open<ModalAlertComponent, ModalAlertTypeContent, ModalAlertResponse>(ModalAlertComponent, {
       data: {
         typeContent: 'esta Frente',
         nameContent: subtopic.name
@@ -92,7 +93,7 @@ export class ModalRemoveComponent implements OnInit {
 
     const materia = this.materiaService.getById(this.materiaId)!;
 
-    const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
+    const confirmationDialog = this.dialog.open<ModalAlertComponent, ModalAlertTypeContent, ModalAlertResponse>(ModalAlertComponent, {
       data: {
         typeContent: 'esta Matéria',
         nameContent: materia.name

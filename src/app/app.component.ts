@@ -13,6 +13,8 @@ import {getTextColorFrom} from "./shared/constants/colors";
 import { environment } from '../environments/environment';
 import {ModalAlertComponent} from "./shared/components/modal/alert/modal-alert.component";
 import {ModalAlertResponse} from "./shared/components/modal/alert/modal-alert-response";
+import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
+import {ModalAlertTypeContent} from "./shared/components/modal/alert/modal-alert-type-content";
 
 @Component({
   selector: 'app-root',
@@ -144,8 +146,16 @@ export class AppComponent implements OnInit {
     modalAdd.afterClosed().subscribe(() => this.updateMonth());
   }
 
+  openImportExport() {
+    const modalImportExport = this.dialog.open(ModalImportExportComponent, {
+      panelClass: 'mini-modal-container'
+    });
+
+    modalImportExport.afterClosed().subscribe(() => this.updateMonth());
+  }
+
   resetData() {
-    const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
+    const confirmationDialog = this.dialog.open<ModalAlertComponent, ModalAlertTypeContent, ModalAlertResponse>(ModalAlertComponent, {
       data: {
         typeContent: 'todos os dados',
         nameContent: ''

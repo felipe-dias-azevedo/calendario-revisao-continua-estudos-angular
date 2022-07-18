@@ -14,7 +14,7 @@ export class NotifyService {
 
   show(message: string, closeMessage?: string) {
     this.notifyService.open(message, closeMessage ?? this.mensagemFechar, {
-      duration: 3000,
+      duration: 4000,
       verticalPosition: 'top',
       horizontalPosition: 'center'
     });

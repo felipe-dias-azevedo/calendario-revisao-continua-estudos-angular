@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {IdentifiableContext} from "../../../services/context-storage/identifiable-context";
+import {IdentifiableContext, ParentIdentifiableContext} from "../../../services/context-storage/identifiable-context";
 import {Subject} from "../../../services/subject/subject";
 import {SubjectService} from "../../../services/subject/subject.service";
 import {NotifyService} from "../../../services/notify/notify.service";
@@ -12,6 +12,7 @@ import {ModalAlertComponent} from "../alert/modal-alert.component";
 import {ModalAlertResponse} from "../alert/modal-alert-response";
 import {ModalUpdateSubjectComponent} from "../update-subject/modal-update-subject.component";
 import {ModalRepeatComponent} from "../repeat/modal-repeat.component";
+import {ModalAlertTypeContent} from "../alert/modal-alert-type-content";
 
 @Component({
   selector: 'app-modal-details-subject',
@@ -52,7 +53,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
   }
 
   deleteSubject() {
-    const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
+    const confirmationDialog = this.dialog.open<ModalAlertComponent, ModalAlertTypeContent, ModalAlertResponse>(ModalAlertComponent, {
       data: {
         typeContent: 'a ocorrência da seguinte Disciplina',
         nameContent: this.subject.name,
@@ -73,7 +74,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
   }
 
   deleteAllSubjects() {
-    const confirmationDialog = this.dialog.open<ModalAlertComponent, any, ModalAlertResponse>(ModalAlertComponent, {
+    const confirmationDialog = this.dialog.open<ModalAlertComponent, ModalAlertTypeContent, ModalAlertResponse>(ModalAlertComponent, {
       data: {
         typeContent: 'todas as ocorrências da seguinte Disciplina',
         nameContent: this.subject.name
@@ -105,7 +106,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
   }
 
   repeatSubject() {
-    const repeatDialog = this.dialog.open<ModalRepeatComponent, any, ModalAlertResponse>(ModalRepeatComponent, {
+    const repeatDialog = this.dialog.open<ModalRepeatComponent, ParentIdentifiableContext, ModalAlertResponse>(ModalRepeatComponent, {
       panelClass: 'modal-container',
       data: {
         id: this.subject.id,

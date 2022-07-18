@@ -1,0 +1,77 @@
+<div class="modal-header">
+    <h4 class="force-font">Importar/Exportar Dados</h4>
+  
+    <button
+      mat-icon-button
+      [mat-dialog-close]="true"
+      class="close-repeat"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-tab-group
+  class="tab-label-top"
+  mat-align-tabs="center"
+  animationDuration="0ms"
+>
+  <mat-dialog-content>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <p>Importar</p>
+        <mat-icon class="mg-l-8">publish</mat-icon>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="flex-column mg-t-3 mg-b-3 mg-l-1 mg-r-1">
+          <div class="flex-between file-holder">
+            <button 
+              mat-stroked-button
+              (click)="uploadInput.click()"
+            >
+              Escolher Arquivo
+            </button>
+            <button 
+              mat-mini-fab 
+              class="mat-elevation-z1 mg-l-1"
+              color="primary" 
+              (click)="uploadData()"
+              [disabled]="!importFileName || importLoading"
+              matTooltip="Salvar dados do arquivo"
+              matTooltipPosition="below"
+            >
+              <mat-icon>send</mat-icon>
+            </button>
+          </div>
+          <input hidden type="file" (change)="readData($event)" #uploadInput accept="application/json">
+          <div class="loader-holder mg-t-1" *ngIf="importLoading">
+            <mat-spinner [diameter]="36"></mat-spinner>
+          </div>
+          <p class="normalize-font mg-t-1 filename-holder" *ngIf="importFileName">
+            {{ importFileName }}
+          </p>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <p>Exportar</p>
+        <mat-icon class="mg-l-8">get_app</mat-icon>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="flex-center mg-t-3 mg-b-3">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="downloadData()"
+          >
+            <span>Download</span>
+            <mat-icon class="mg-l-4">attach_file</mat-icon>
+          </button>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+  </mat-dialog-content>
+</mat-tab-group>

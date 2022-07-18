@@ -82,6 +82,11 @@ input[type="color"]::-webkit-color-swatch {
     height: 98%;
     min-width: 95%;
   }
+
+  .mini-modal-container {
+    height: 98%;
+    min-width: 95%;
+  }
 }
 
 .modal-header {

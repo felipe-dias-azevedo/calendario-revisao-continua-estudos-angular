@@ -25,6 +25,7 @@ import {MatListModule} from "@angular/material/list";
 import { ModalAlertComponent } from './shared/components/modal/alert/modal-alert.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatChipsModule} from "@angular/material/chips";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner"
 import { ModalUpdateSubjectComponent } from './shared/components/modal/update-subject/modal-update-subject.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatCardModule} from "@angular/material/card";
@@ -33,6 +34,8 @@ import {MatTableModule} from "@angular/material/table";
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { ModalRepeatAddComponent } from './shared/components/modal/repeat-add/modal-repeat-add.component';
+import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
+import { ModalImportTableComponent } from './shared/components/modal/import-table/modal-import-table.component';
 
 registerLocaleData(localePT);
 
@@ -46,7 +49,9 @@ registerLocaleData(localePT);
     ModalAlertComponent,
     ModalUpdateSubjectComponent,
     ModalRepeatComponent,
-    ModalRepeatAddComponent
+    ModalRepeatAddComponent,
+    ModalImportExportComponent,
+    ModalImportTableComponent
   ],
     imports: [
         BrowserModule,
@@ -75,7 +80,8 @@ registerLocaleData(localePT);
         MatChipsModule,
         MatMenuModule,
         MatCardModule,
-        MatTableModule
+        MatTableModule,
+        MatProgressSpinnerModule
     ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
