@@ -25,6 +25,8 @@ export class ModalDetailsSubjectComponent implements OnInit {
   subtopic!: Subtopic | null;
   materia!: Materia | null;
 
+  subjectComments?: string[];
+
   constructor(
     private dialogRef: MatDialogRef<ModalDetailsSubjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IdentifiableContext,
@@ -50,6 +52,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
     this.subject = subject!;
     this.materia = this.materiaService.getById(this.subject.materiaId);
     this.subtopic = this.subtopicService.getById(this.subject.subtopicId);
+    this.subjectComments = subject!.comments?.split('\n');
   }
 
   deleteSubject() {

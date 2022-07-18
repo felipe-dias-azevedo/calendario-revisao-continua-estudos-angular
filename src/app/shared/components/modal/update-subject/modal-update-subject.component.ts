@@ -47,7 +47,8 @@ export class ModalUpdateSubjectComponent implements OnInit {
     this.formUpdateSubject = this.formBuilder.group({
       subjectName: [this.subject.name, [Validators.required, Validators.minLength(2)]],
       subtopicId: [this.subtopic?.id ?? null, [Validators.required, Validators.minLength(2)]],
-      materiaId: [this.materia?.id ?? null, [Validators.required, Validators.minLength(2)]]
+      materiaId: [this.materia?.id ?? null, [Validators.required, Validators.minLength(2)]],
+      subjectComments: this.subject.comments ?? null
     });
   }
 
@@ -57,7 +58,8 @@ export class ModalUpdateSubjectComponent implements OnInit {
   }
 
   updateSubjects() {
-    const { subjectName, materiaId, subtopicId } = this.formUpdateSubject.getRawValue() as FormUpdateSubjectModel;
+    const { subjectName, materiaId, subtopicId, subjectComments } = this.formUpdateSubject.getRawValue() as FormUpdateSubjectModel;
+    const subjectComment = subjectComments ?? undefined;
 
     // TODO: mudar para custom validator
     if (
@@ -65,14 +67,15 @@ export class ModalUpdateSubjectComponent implements OnInit {
       this.subject.materiaId === materiaId &&
       this.materia.id === materiaId &&
       this.subject.subtopicId === subtopicId &&
-      this.subtopic.id === subtopicId
+      this.subtopic.id === subtopicId &&
+      this.subject.comments === subjectComment
     ) {
       this.notifyService.show("Os dados não foram alterados");
       return;
     }
 
     this.subjectService.updateByParentId(this.subject.parentId, {
-      ...this.subject, name: subjectName, materiaId, subtopicId
+      ...this.subject, name: subjectName, materiaId, subtopicId, comments: subjectComment
     });
 
     this.notifyService.show('Disciplina atualizada com sucesso!');

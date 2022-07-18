@@ -3,4 +3,5 @@ export interface FormSubjectModel {
     subtopicId: string;
     materiaId: string;
     dataInicio: Date;
+    comments: string | null;
 }

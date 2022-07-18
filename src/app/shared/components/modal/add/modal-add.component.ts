@@ -56,7 +56,8 @@ export class ModalAddComponent implements OnInit {
       subjectName: ['', [Validators.required, Validators.minLength(2)]],
       subtopicId: [null, [Validators.required, Validators.minLength(2)]],
       materiaId: [null, [Validators.required, Validators.minLength(2)]],
-      dataInicio: [new Date(), Validators.required]
+      dataInicio: [new Date(), Validators.required],
+      comments: null
     });
     this.formSubtopic = this.formBuilder.group({
       subtopicName: ['', Validators.required]
@@ -72,7 +73,8 @@ export class ModalAddComponent implements OnInit {
       subjectName: '',
       subtopicId: null,
       materiaId: null,
-      dataInicio: new Date()
+      dataInicio: new Date(),
+      comments: null
     });
     this.formSubtopic.reset({
       subtopicName: ''
@@ -119,13 +121,14 @@ export class ModalAddComponent implements OnInit {
   }
 
   saveSubject(formSubjectElement: FormGroupDirective) {
-    const { subjectName, materiaId, subtopicId, dataInicio } = this.formSubject.getRawValue() as FormSubjectModel;
+    const { subjectName, materiaId, subtopicId, dataInicio, comments } = this.formSubject.getRawValue() as FormSubjectModel;
 
     const subject: NewSubject = {
       name: subjectName,
       materiaId: materiaId,
       subtopicId: subtopicId,
-      date: dataInicio
+      date: dataInicio,
+      comments: comments ?? undefined
     };
 
     const daysToAdd = this.subjectDays;

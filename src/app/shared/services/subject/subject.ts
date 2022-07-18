@@ -5,6 +5,7 @@ export interface NewSubject {
   subtopicId: string;
   materiaId: string;
   date: Date;
+  comments?: string;
 }
 
 export interface PreSubject extends NewSubject {

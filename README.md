@@ -21,9 +21,11 @@ Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fon
 - [x] colocar informações básicas da disciplina em repetir ocorrencias
 - [x] Opções de repetição customizadas em adicionar novo
 - [x] Importar dados
-- [ ] Input de observações na criação de nova disciplina
+- [x] Input de observações na criação de nova disciplina
+- [ ] Atualizar observações por repetição da disciplina
 - [ ] Esmaecer dias anteriores na timeline da home
 - [x] Exportar dados
+- [ ] Autocomplete on remove modal
 - [ ] Busca aprimorada para mobile
 - [ ] Dark theme/mode
 - [ ] menu de configurações (opções default de repetições, dark mode, etc)
