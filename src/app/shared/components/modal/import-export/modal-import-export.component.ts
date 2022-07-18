@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FileData, FileDataFormated} from 'src/app/shared/models/file-data';
+import {
+  FileData,
+  FileDataFormated,
+  FileMateriaData,
+  FileSubjectData,
+  FileSubtopicData
+} from 'src/app/shared/models/file-data';
 import { NotifyService } from 'src/app/shared/services/notify/notify.service';
 import {BackupService} from "../../../services/backup/backup.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -8,6 +14,10 @@ import {SubjectService} from "../../../services/subject/subject.service";
 import {SubtopicService} from "../../../services/subtopic/subtopic.service";
 import {MateriaService} from "../../../services/materia/materia.service";
 import { saveAs } from "file-saver";
+import {Materia} from "../../../services/materia/materia";
+import {Subtopic} from "../../../services/subtopic/subtopic";
+import {Subject} from "../../../services/subject/subject";
+import {FileDataBackup} from "../../../models/file-data-backup";
 
 @Component({
   selector: 'app-modal-import-export',
@@ -19,7 +29,8 @@ export class ModalImportExportComponent implements OnInit {
   // IMPORT DATA
   importFileName?: string;
   private importFileContent?: string;
-  private importData?: FileData;
+  private importData?: FileData | FileDataBackup;
+  private isOldBackup?: boolean;
 
   importLoading!: boolean;
 
@@ -41,6 +52,7 @@ export class ModalImportExportComponent implements OnInit {
     this.importFileContent = undefined;
     this.importData = undefined;
     this.importLoading = false;
+    this.isOldBackup = undefined;
   }
 
   readData(event: Event) {
@@ -80,12 +92,16 @@ export class ModalImportExportComponent implements OnInit {
           return;
         }
 
-        if (!this.backupService.isOldBackup(this.importFileContent)) {
+        const oldBackup = this.backupService.isOldBackup(this.importFileContent);
+        const newBackup = this.backupService.isNewBackup(this.importFileContent);
+
+        if (!oldBackup && !newBackup) {
           this.notifyService.show('Os dados não são compatíveis');
           this.resetData();
           return;
         }
-  
+
+        this.isOldBackup = oldBackup;
         this.importData = this.backupService.getData(this.importFileContent);
   
         this.importLoading = false;
@@ -104,9 +120,15 @@ export class ModalImportExportComponent implements OnInit {
     const data = this.importData!;
     this.importLoading = true;
 
-    const materias = this.backupService.formatMateriaData(data.materias);
-    const subtopics = this.backupService.formatSubtopicData(data.subtopics);
-    const subjects = this.backupService.formatSubjectData(data.subjects, materias, subtopics);
+    let materias = data.materias as Materia[];
+    let subtopics = data.subtopics as Subtopic[];
+    let subjects = data.subjects as Subject[];
+
+    if (this.isOldBackup) {
+      materias = this.backupService.formatMateriaData(data.materias as FileMateriaData[]);
+      subtopics = this.backupService.formatSubtopicData(data.subtopics as FileSubtopicData[]);
+      subjects = this.backupService.formatSubjectData(data.subjects as FileSubjectData[], materias, subtopics);
+    }
 
     if (materias.length === 0 && subtopics.length === 0 && subjects.length === 0) {
       this.notifyService.show('Dados estão vazios');

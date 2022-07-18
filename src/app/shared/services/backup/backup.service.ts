@@ -5,6 +5,7 @@ import {v4 as uuid} from "uuid";
 import {Subtopic} from "../subtopic/subtopic";
 import {Subject} from "../subject/subject";
 import '../../extensions/date.extensions';
+import {FileDataBackup} from "../../models/file-data-backup";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,22 @@ import '../../extensions/date.extensions';
 export class BackupService {
 
   constructor() { }
+
+  isNewBackup(content: string): boolean {
+    try {
+      const value = JSON.parse(content) as FileDataBackup;
+      const isNew = this.isNewBackupType(value);
+      return value !== undefined && isNew;
+    } catch {
+      return false;
+    }
+  }
+
+  private isNewBackupType(object: FileDataBackup): object is FileDataBackup {
+    return object.materias.filter(m => m.id !== undefined && m.name !== undefined && m.color !== undefined).length === object.materias.length &&
+        object.subtopics.filter(s => s.id !== undefined && s.name !== undefined).length === object.subtopics.length &&
+        object.subjects.filter(s => s.id !== undefined && s.parentId !== undefined && s.name !== undefined).length === object.subjects.length;
+  }
 
   isOldBackup(content: string): boolean {
     try {
