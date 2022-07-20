@@ -6,6 +6,7 @@ export interface NewSubject {
   materiaId: string;
   date: Date;
   comments?: string;
+  notes?: string;
 }
 
 export interface PreSubject extends NewSubject {

@@ -13,6 +13,8 @@ import {ModalAlertResponse} from "../alert/modal-alert-response";
 import {ModalUpdateSubjectComponent} from "../update-subject/modal-update-subject.component";
 import {ModalRepeatComponent} from "../repeat/modal-repeat.component";
 import {ModalAlertTypeContent} from "../alert/modal-alert-type-content";
+import {ModalNoteSubjectComponent} from "../note-subject/modal-note-subject.component";
+import {NoteSubject} from "../note-subject/note-subject";
 
 @Component({
   selector: 'app-modal-details-subject',
@@ -26,6 +28,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
   materia!: Materia | null;
 
   subjectComments?: string[];
+  subjectNotes?: string[];
 
   constructor(
     private dialogRef: MatDialogRef<ModalDetailsSubjectComponent>,
@@ -53,6 +56,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
     this.materia = this.materiaService.getById(this.subject.materiaId);
     this.subtopic = this.subtopicService.getById(this.subject.subtopicId);
     this.subjectComments = subject!.comments?.split('\n');
+    this.subjectNotes = subject!.notes?.split('\n');
   }
 
   deleteSubject() {
@@ -122,6 +126,29 @@ export class ModalDetailsSubjectComponent implements OnInit {
       }
 
       this.dialogRef.close();
+    });
+  }
+
+  addNoteSubject() {
+    const noteDialog = this.dialog.open<ModalNoteSubjectComponent, NoteSubject, NoteSubject>(ModalNoteSubjectComponent, {
+      panelClass: 'mini-modal-container',
+      data: {
+        note: this.subject.notes
+      }
+    });
+    noteDialog.afterClosed().subscribe(result => {
+      if (result === undefined || result.note === undefined) {
+        return;
+      }
+
+      const subject: Subject = {
+        ...this.subject,
+        notes: result?.note
+      }
+
+      this.subjectService.update(this.subject.id, subject);
+
+      this.getData();
     });
   }
 }

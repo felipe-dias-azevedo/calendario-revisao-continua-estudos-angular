@@ -75,7 +75,7 @@ export class ModalUpdateSubjectComponent implements OnInit {
     }
 
     this.subjectService.updateByParentId(this.subject.parentId, {
-      ...this.subject, name: subjectName, materiaId, subtopicId, comments: subjectComment
+      ...this.subject, name: subjectName, materiaId, subtopicId, comments: subjectComment?.trim()
     });
 
     this.notifyService.show('Disciplina atualizada com sucesso!');

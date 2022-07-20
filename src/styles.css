@@ -100,7 +100,6 @@ input[type="color"]::-webkit-color-swatch {
   padding-top: 1rem;
 }
 
-
 /* MODALS */
 
 .modal-header {
@@ -128,4 +127,10 @@ input[type="color"]::-webkit-color-swatch {
 .tab-content {
   display: flex;
   flex-direction: column;
+}
+
+.mat-outline {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0,0,0,.12);
 }

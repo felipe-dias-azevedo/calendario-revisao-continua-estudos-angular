@@ -20,7 +20,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
-import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatListModule} from "@angular/material/list";
 import { ModalAlertComponent } from './shared/components/modal/alert/modal-alert.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
@@ -36,6 +36,7 @@ import localePT from '@angular/common/locales/pt';
 import { ModalRepeatAddComponent } from './shared/components/modal/repeat-add/modal-repeat-add.component';
 import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
 import { ModalImportTableComponent } from './shared/components/modal/import-table/modal-import-table.component';
+import { ModalNoteSubjectComponent } from './shared/components/modal/note-subject/modal-note-subject.component';
 
 registerLocaleData(localePT);
 
@@ -51,7 +52,8 @@ registerLocaleData(localePT);
     ModalRepeatComponent,
     ModalRepeatAddComponent,
     ModalImportExportComponent,
-    ModalImportTableComponent
+    ModalImportTableComponent,
+    ModalNoteSubjectComponent
   ],
     imports: [
         BrowserModule,

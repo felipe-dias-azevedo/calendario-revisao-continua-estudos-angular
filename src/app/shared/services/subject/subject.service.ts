@@ -62,7 +62,7 @@ export class SubjectService {
     this.get()
       .filter(s => s.parentId === parentId)
       .forEach(s => this.contextStorageService.update(this.key, s.id, {
-        ...subject, date: s.date, parentId: s.parentId
+        ...subject, date: s.date, parentId: s.parentId, notes: s.notes
       }));
   }
 

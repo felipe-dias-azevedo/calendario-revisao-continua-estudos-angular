@@ -10,53 +10,82 @@
 </div>
 
 <mat-dialog-content>
-  <mat-list class="pd-t-2 pd-b-2">
+  <mat-card class="mat-elevation-z0 mg-b-2 mg-t-2 mat-outline">
 
-    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-list>
 
-    <div class="force-font" mat-subheader>Nome da Disciplina</div>
-    <mat-list-item>
-      <b class="force-font" mat-line>{{ subject.name }}</b>
-    </mat-list-item>
+        <div class="force-font" mat-subheader>Nome da Disciplina</div>
+        <mat-list-item>
+          <b class="force-font" mat-line>{{ subject.name }}</b>
+        </mat-list-item>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <div class="force-font" mat-subheader>Data da Disciplina</div>
-    <mat-list-item>
-      <b class="force-font" mat-line>{{ subject.date | date: 'dd/MM/yyyy' }}</b>
-    </mat-list-item>
+        <div class="force-font" mat-subheader>Data da Disciplina</div>
+        <mat-list-item>
+          <b class="force-font" mat-line>{{ subject.date | date: 'dd/MM/yyyy' }}</b>
+        </mat-list-item>
 
-    <ng-container *ngIf="subject.comments">
-      <mat-divider></mat-divider>
+        <ng-container *ngIf="subject.comments">
+          <mat-divider></mat-divider>
 
-      <div class="force-font" mat-subheader>Observações da Disciplina</div>
-      <mat-list-item>
-        <b class="force-font" mat-line *ngFor="let comment of subjectComments; let last = last">
-          {{ comment }}
-          <br *ngIf="!last">
-        </b>
-      </mat-list-item>
-    </ng-container>
+          <div class="force-font" mat-subheader>Observações da Disciplina</div>
+          <mat-list-item>
+            <div class="force-font" mat-line *ngFor="let comment of subjectComments; let last = last">
+              <span class="normalize-font">{{ comment }}</span>
+              <br *ngIf="!last">
+            </div>
+          </mat-list-item>
+        </ng-container>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <div class="force-font" mat-subheader>Nome da Frente</div>
-    <mat-list-item>
-      <b class="force-font" mat-line>{{ subtopic?.name }}</b>
-    </mat-list-item>
+        <div class="force-font" mat-subheader>Nome da Frente</div>
+        <mat-list-item>
+          <b class="force-font" mat-line>{{ subtopic?.name }}</b>
+        </mat-list-item>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <div class="force-font" mat-subheader>Nome da Matéria</div>
-    <mat-list-item>
-      <b class="force-font" mat-line>{{ materia?.name }}</b>
-    </mat-list-item>
+        <div class="force-font" mat-subheader>Nome da Matéria</div>
+        <mat-list-item>
+          <div class="force-font" mat-line style="display: flex">
+            <div
+              class="materia-color"
+              [ngStyle]="{'background-color': materia?.color}"
+            ></div>
+            <span>{{ materia?.name }}</span>
+          </div>
+        </mat-list-item>
 
-    <mat-divider></mat-divider>
-  </mat-list>
+        <ng-container *ngIf="subject.notes">
+          <mat-divider></mat-divider>
+
+          <div class="force-font" mat-subheader>Anotações desta Repetição</div>
+          <mat-list-item>
+            <div class="force-font" mat-line *ngFor="let notes of subjectNotes; let last = last">
+              <span class="normalize-font">{{ notes }}</span>
+              <br *ngIf="!last">
+            </div>
+          </mat-list-item>
+        </ng-container>
+
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </mat-dialog-content>
 
 <mat-dialog-actions align="start">
+  <button
+    mat-stroked-button
+    color="primary"
+    (click)="addNoteSubject()"
+    matTooltip="Adicionar observações para esta repetição"
+    matTooltipPosition="above"
+  >
+    Anotar
+  </button>
   <button
     mat-flat-button
     color="primary"

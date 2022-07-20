@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h4 class="force-font">Adicionar Anotação</h4>
+
+    <button
+        mat-icon-button
+        class="mg-l-2"
+        [mat-dialog-close]="undefined"
+    >
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+    <section class="mg-tb-2">
+        <mat-form-field class="normalize-font width" appearance="outline" color="primary">
+            <mat-label>Anotações</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="3"
+                [(ngModel)]="newNote"
+            ></textarea>
+            <mat-hint>Esta anotação estará presente somente para esta repetição</mat-hint>
+        </mat-form-field>
+    </section>
+</mat-dialog-content>
+
+<mat-dialog-actions align="start">
+    <button
+        mat-flat-button
+        color="primary"
+        (click)="save()"
+        [disabled]="newNote === note"
+    >
+        Salvar
+    </button>
+    <button mat-flat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>
