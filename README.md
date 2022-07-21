@@ -5,6 +5,8 @@ Este projeto foi realizado para auxiliar os estudos e a memorização relativa a
 
 Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fonte original em Javascript puro.
 
+[Acesse aqui](https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/)
+
 ### Techs
 * Angular 14
 * Angular Material
