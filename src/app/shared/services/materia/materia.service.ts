@@ -12,7 +12,8 @@ export class MateriaService {
   constructor(private contextStorageService: ContextStorageService<NewMateria, Materia>) { }
 
   get(): Materia[] {
-    return this.contextStorageService.get(this.key);
+    return this.contextStorageService.get(this.key)
+      .filter(m => m.id !== undefined);
   }
 
   getById(id: string): Materia | null {

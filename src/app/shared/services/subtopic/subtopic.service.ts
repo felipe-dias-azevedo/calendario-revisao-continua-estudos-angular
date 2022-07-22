@@ -12,7 +12,8 @@ export class SubtopicService {
   constructor(private contextStorageService: ContextStorageService<NewSubtopic, Subtopic>) { }
 
   get(): Subtopic[] {
-    return this.contextStorageService.get(this.key);
+    return this.contextStorageService.get(this.key)
+      .filter(s => s.id !== undefined);
   }
 
   getById(id: string): Subtopic | null {

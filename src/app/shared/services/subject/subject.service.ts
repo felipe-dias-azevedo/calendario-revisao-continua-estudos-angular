@@ -16,6 +16,7 @@ export class SubjectService {
 
   get(): Subject[] {
     return this.contextStorageService.get(this.key)
+      .filter(s => s.id !== undefined && s.parentId !== undefined)
       .map(s => {
         return {...s, date: new Date(s.date)}
       });
