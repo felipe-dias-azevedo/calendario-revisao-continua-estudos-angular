@@ -15,25 +15,25 @@
     <mat-card-content>
       <mat-list>
 
-        <div class="force-font" mat-subheader>Nome da Disciplina</div>
+        <div class="force-font" mat-subheader>Disciplina</div>
         <mat-list-item>
           <b class="force-font" mat-line>{{ subject.name }}</b>
         </mat-list-item>
 
         <mat-divider></mat-divider>
 
-        <div class="force-font" mat-subheader>Data da Disciplina</div>
+        <div class="force-font" mat-subheader>Data</div>
         <mat-list-item>
           <b class="force-font" mat-line>{{ subject.date | date: 'dd/MM/yyyy' }}</b>
         </mat-list-item>
 
-        <ng-container *ngIf="subject.comments">
+        <ng-container *ngIf="subject.notes">
           <mat-divider></mat-divider>
 
-          <div class="force-font" mat-subheader>Observações da Disciplina</div>
+          <div class="force-font" mat-subheader>Anotações para este Dia</div>
           <mat-list-item>
-            <div class="force-font" mat-line *ngFor="let comment of subjectComments; let last = last">
-              <span class="normalize-font">{{ comment }}</span>
+            <div class="force-font" mat-line *ngFor="let notes of subjectNotes; let last = last">
+              <span class="normalize-font">{{ notes }}</span>
               <br *ngIf="!last">
             </div>
           </mat-list-item>
@@ -41,31 +41,51 @@
 
         <mat-divider></mat-divider>
 
-        <div class="force-font" mat-subheader>Nome da Frente</div>
+        <div class="force-font" mat-subheader>Frente</div>
         <mat-list-item>
-          <b class="force-font" mat-line>{{ subtopic?.name }}</b>
+          <ng-container *ngIf="subtopic">
+            <div mat-line>
+              <span class="normalize-font">{{ subtopic?.name }}</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!subtopic">
+            <i class="normalize-font italic-font" mat-line>
+              Frente apagada.
+              <br>
+              Insira uma nova ao atualizar a disciplina.
+            </i>
+          </ng-container>
         </mat-list-item>
 
         <mat-divider></mat-divider>
 
-        <div class="force-font" mat-subheader>Nome da Matéria</div>
+        <div class="force-font" mat-subheader>Matéria</div>
         <mat-list-item>
-          <div class="force-font" mat-line style="display: flex">
-            <div
-              class="materia-color"
-              [ngStyle]="{'background-color': materia?.color}"
-            ></div>
-            <span>{{ materia?.name }}</span>
-          </div>
+          <ng-container *ngIf="materia">
+            <div mat-line style="display: flex">
+              <div
+                class="materia-color"
+                [ngStyle]="{'background-color': materia?.color}"
+              ></div>
+              <span class="normalize-font">{{ materia?.name }}</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!materia">
+            <i class="normalize-font italic-font" mat-line>
+              Matéria apagada.
+              <br>
+              Insira uma nova ao atualizar a disciplina.
+            </i>
+          </ng-container>
         </mat-list-item>
 
-        <ng-container *ngIf="subject.notes">
+        <ng-container *ngIf="subject.comments">
           <mat-divider></mat-divider>
 
-          <div class="force-font" mat-subheader>Anotações desta Repetição</div>
+          <div class="force-font" mat-subheader>Observações Gerais</div>
           <mat-list-item>
-            <div class="force-font" mat-line *ngFor="let notes of subjectNotes; let last = last">
-              <span class="normalize-font">{{ notes }}</span>
+            <div class="force-font" mat-line *ngFor="let comment of subjectComments; let last = last">
+              <span class="normalize-font">{{ comment }}</span>
               <br *ngIf="!last">
             </div>
           </mat-list-item>

@@ -5,6 +5,10 @@
   margin-right: 1rem;
 }
 
+.italic-font {
+  font-style: italic;
+}
+
 .pd-t-2 {
   padding-top: 2rem;
 }
