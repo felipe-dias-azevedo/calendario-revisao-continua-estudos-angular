@@ -41,7 +41,7 @@ export class ContextStorageService <NT, T extends IdentifiableContext & NT> {
   }
 
   add(key: string, content: NT): void {
-    const newContent: IdentifiableContext & NT = { id: uuid(), ...content };
+    const newContent: IdentifiableContext & NT = { ...content, id: uuid() };
 
     this.addNew(key, newContent);
   }

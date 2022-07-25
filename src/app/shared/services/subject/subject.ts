@@ -6,10 +6,13 @@ export interface NewSubject {
   materiaId: string;
   date: Date;
   comments?: string;
+}
+
+export interface SubjectStructure extends NewSubject {
   notes?: string;
 }
 
-export interface PreSubject extends NewSubject {
+export interface PreSubject extends SubjectStructure {
   parentId: string;
 }
 

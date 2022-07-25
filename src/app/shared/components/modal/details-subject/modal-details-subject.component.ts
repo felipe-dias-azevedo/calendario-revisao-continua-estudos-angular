@@ -15,6 +15,7 @@ import {ModalRepeatComponent} from "../repeat/modal-repeat.component";
 import {ModalAlertTypeContent} from "../alert/modal-alert-type-content";
 import {ModalNoteSubjectComponent} from "../note-subject/modal-note-subject.component";
 import {NoteSubject} from "../note-subject/note-subject";
+import {ModalRepeatResponse} from "../repeat/modal-repeat-response";
 
 @Component({
   selector: 'app-modal-details-subject',
@@ -113,7 +114,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
   }
 
   repeatSubject() {
-    const repeatDialog = this.dialog.open<ModalRepeatComponent, ParentIdentifiableContext, ModalAlertResponse>(ModalRepeatComponent, {
+    const repeatDialog = this.dialog.open<ModalRepeatComponent, ParentIdentifiableContext, ModalRepeatResponse>(ModalRepeatComponent, {
       panelClass: 'modal-container',
       data: {
         id: this.subject.id,
@@ -121,7 +122,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
       }
     });
     repeatDialog.afterClosed().subscribe(result => {
-      if (result === undefined || !result.confirm) {
+      if (result === undefined) {
         return;
       }
 

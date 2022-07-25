@@ -14,6 +14,7 @@ import '../../../extensions/date.extensions';
 import {SubtopicService} from "../../../services/subtopic/subtopic.service";
 import {MateriaService} from "../../../services/materia/materia.service";
 import {SubjectNullableData} from "../../../models/subject-nullable-data";
+import {ModalRepeatResponse} from "./modal-repeat-response";
 
 @Component({
   selector: 'app-modal-repeat',
@@ -34,7 +35,7 @@ export class ModalRepeatComponent implements OnInit {
   anyDayAdded!: boolean;
 
   constructor(
-    private dialogRef: MatDialogRef<ModalRepeatComponent>,
+    private dialogRef: MatDialogRef<ModalRepeatComponent, ModalRepeatResponse>,
     @Inject(MAT_DIALOG_DATA) public data: ParentIdentifiableContext,
     private subjectService: SubjectService,
     private subtopicService: SubtopicService,
@@ -111,18 +112,18 @@ export class ModalRepeatComponent implements OnInit {
 
   saveDays() {
     const newSubjects = this.subjectDates.data;
-    const oldSubject: Subject = this.subjects.sort((a, b) => b.date.diffInDays(a.date))[0];
+    const oldSubjects: Subject[] = this.subjects.sort((a, b) => b.date.diffInDays(a.date));
+    const oldSubject = oldSubjects[0];
 
     const subject: NewSubject = {
       ...oldSubject,
       date: this.firstDate.clone()
     }
 
-    this.subjectService.deleteByParentId(this.data.parentId);
-
     const days = newSubjects.map(s => s.ammount);
-    this.subjectService.addInDays(subject, days);
 
-    this.dialogRef.close({ confirm });
+    const parentId = this.subjectService.repeat(subject, oldSubjects, days, this.data.parentId);
+
+    this.dialogRef.close({ parentId });
   }
 }

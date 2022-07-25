@@ -44,7 +44,7 @@ export class SubjectService {
     this.contextStorageService.add(this.key, subject);
   }
 
-  addInDays(subject: NewSubject, days: number[]): void {
+  addInDays(subject: NewSubject, days: number[]): string {
     const parentId = uuid();
 
     const subjects: PreSubject[] = days.map(d => {
@@ -53,6 +53,31 @@ export class SubjectService {
     });
 
     subjects.forEach(s => this.add(s));
+
+    return parentId;
+  }
+
+  repeat(subjectStructure: NewSubject, oldSubjects: Subject[], newDays: number[], oldParentId: string): string {
+
+    const parentId = uuid();
+    const firstDate = subjectStructure.date.clone();
+
+    this.deleteByParentId(oldParentId);
+
+    const subjects: PreSubject[] = newDays.map(d => {
+      const note = oldSubjects.find(s => s.date.isSameDate(firstDate.clone().addDays(d)));
+
+      return {
+        ...subjectStructure,
+        date: firstDate.clone().addDays(d),
+        parentId,
+        notes: note?.notes ?? undefined
+      };
+    });
+
+    subjects.forEach(s => this.add(s));
+
+    return parentId;
   }
 
   update(id: string, subject: PreSubject): void {
