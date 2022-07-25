@@ -111,12 +111,11 @@ export class ModalRepeatComponent implements OnInit {
 
   saveDays() {
     const newSubjects = this.subjectDates.data;
+    const oldSubject: Subject = this.subjects.sort((a, b) => b.date.diffInDays(a.date))[0];
 
     const subject: NewSubject = {
-      date: this.firstDate.clone(),
-      name: this.subjects[0].name,
-      materiaId: this.subjects[0].materiaId,
-      subtopicId: this.subjects[0].subtopicId
+      ...oldSubject,
+      date: this.firstDate.clone()
     }
 
     this.subjectService.deleteByParentId(this.data.parentId);
