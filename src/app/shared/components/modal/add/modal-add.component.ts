@@ -86,13 +86,12 @@ export class ModalAddComponent implements OnInit {
   }
 
   private updateData() {
-    this.subtopics = this.subtopicService.get();
-    this.materias = this.materiaService.get();
+    this.subtopicService.get().subscribe(s => this.subtopics = s);
+    this.materiaService.get().subscribe(m => this.materias = m);
   }
 
   changeTabType(event: MatTabChangeEvent) {
     this.tabType = event.index;
-    this.updateData();
   }
 
   getDateAddedDay(day: number): Date {

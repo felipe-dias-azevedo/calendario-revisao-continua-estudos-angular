@@ -1,15 +1,23 @@
-import { Injectable } from '@angular/core';
 import {v4 as uuid} from "uuid";
 import {IdentifiableContext} from "./identifiable-context";
+import {BehaviorSubject, map, Observable} from "rxjs";
 
-@Injectable({
-  providedIn: 'root'
-})
 export class ContextStorageService <NT, T extends IdentifiableContext & NT> {
 
-  constructor() { }
+  private readonly key!: string;
 
-  get(key: string): T[] {
+  stateModel!: BehaviorSubject<T[]>;
+  private readonly model!: Observable<T[]>;
+
+  constructor(key: string) {
+    this.key = key;
+
+    const values = this.getData(this.key);
+    this.stateModel = new BehaviorSubject<T[]>(values);
+    this.model = this.stateModel.asObservable();
+  }
+
+  private getData(key: string): T[] {
     const contentString = localStorage.getItem(key);
 
     if (contentString === null) {
@@ -19,35 +27,44 @@ export class ContextStorageService <NT, T extends IdentifiableContext & NT> {
     return JSON.parse(contentString);
   }
 
-  getById(key: string, id: string): T | null {
-    const contents = this.get(key);
-    const content = contents.find(m => m.id === id);
-    return content || null;
+  private updateStorage(content: T[]) {
+    const jsonContent = JSON.stringify(content);
+    localStorage.setItem(this.key, jsonContent);
   }
 
-  private addNew(key: string, newContent: IdentifiableContext & NT): void {
-    const contentString = localStorage.getItem(key);
-
-    if (contentString === null) {
-      const jsonContent = JSON.stringify([newContent]);
-      localStorage.setItem(key, jsonContent);
-      return;
-    }
-
-    const oldContent: T[] = JSON.parse(contentString);
-    const contents = [...oldContent, newContent];
-    const jsonContent = JSON.stringify(contents);
-    localStorage.setItem(key, jsonContent);
+  get(): Observable<T[]> {
+    return this.model;
   }
 
-  add(key: string, content: NT): void {
-    const newContent: IdentifiableContext & NT = { ...content, id: uuid() };
-
-    this.addNew(key, newContent);
+  getSync(): T[] {
+    return this.stateModel.value;
   }
 
-  update(key: string, id: string, content: NT): void {
-    const value = this.getById(key, id);
+  getById(id: string): Observable<T | null> {
+    return this.get()
+        .pipe(
+            map(c => c.find(m => m.id === id) ?? null)
+        );
+  }
+
+  private addNew(newContent: T): void {
+    const newContents: T[] = [...this.stateModel.value, newContent];
+    this.stateModel.next(newContents);
+    this.updateStorage(newContents);
+  }
+
+  add(content: NT): void {
+    const newContent: T = <T>{ ...content, id: uuid() };
+
+    this.addNew(newContent);
+  }
+
+  addWithId(content: NT): void {
+    this.addNew(<T>{...content});
+  }
+
+  update(id: string, content: NT): void {
+    const value = this.stateModel.value.find(m => m.id === id) ?? null;
 
     if (value === null) {
       return;
@@ -55,25 +72,35 @@ export class ContextStorageService <NT, T extends IdentifiableContext & NT> {
 
     const updatedContent: T = { ...value, ...content, id };
 
-    this.deleteById(key, id);
-
-    this.addNew(key, updatedContent);
+    const newContents: T[] = [...this.stateModel.value.filter(m => m.id !== id), updatedContent];
+    this.stateModel.next(newContents);
+    this.updateStorage(newContents);
   }
 
-  deleteById(key: string, id: string): void {
-    const contentString = localStorage.getItem(key);
+  updateAll(content: T[]) {
 
-    if (contentString === null) {
-      return;
-    }
+    const contentsUpdated: T[] = content.map(nc => {
+      const value = this.stateModel.value.find(m => m.id === nc.id)!;
 
-    let oldContent: T[] = JSON.parse(contentString);
-    const contents = oldContent.filter(m => m.id !== id);
-    const jsonContent = JSON.stringify(contents);
-    localStorage.setItem(key, jsonContent);
+      return <T>{ ...value, ...nc, id: nc.id };
+    });
+
+    const oldContents: T[] = this.stateModel.value.filter(v => !content.map(c => c.id).includes(v.id));
+
+    const newContents: T[] = [...oldContents, ...contentsUpdated];
+    this.stateModel.next(newContents);
+    this.updateStorage(newContents);
   }
 
-  deleteAll(key: string): void {
-    localStorage.removeItem(key);
+  deleteById(id: string): void {
+    const newContent = this.stateModel.value.filter(m => m.id !== id);
+    this.stateModel.next(newContent);
+    this.updateStorage(newContent);
+  }
+
+  deleteAll(): void {
+    const value: T[] = [];
+    this.stateModel.next(value);
+    this.updateStorage(value);
   }
 }

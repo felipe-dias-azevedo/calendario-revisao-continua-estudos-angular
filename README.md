@@ -26,7 +26,7 @@ Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fon
 - [x] Input de observações na criação de nova disciplina
 - [x] Adicionar anotações por repetição da disciplina
 - [ ] Esmaecer dias anteriores na timeline da home
-- [ ] Usar observables ao acessar dados
+- [x] Usar observables ao acessar dados
 - [x] Exportar dados
 - [ ] Autocomplete on remove modal
 - [ ] Busca aprimorada para mobile

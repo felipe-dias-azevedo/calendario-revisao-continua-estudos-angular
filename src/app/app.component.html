@@ -69,7 +69,7 @@
       <mat-label>Pesquisa</mat-label>
       <input
         matInput
-        (keyup)="updateData()"
+        (keyup)="getData()"
         [(ngModel)]="textFilter"
       />
       <mat-icon matSuffix>search</mat-icon>
@@ -80,5 +80,4 @@
   [actualDay]="now.getDate()"
   [monthsForward]="monthsForward"
   [subjectPerDayList]="subjectPerDayList"
-  (updateChildren)="updateData()"
 ></app-studies-day-list>

@@ -53,8 +53,8 @@ export class ModalUpdateSubjectComponent implements OnInit {
   }
 
   private getData() {
-    this.subtopics = this.subtopicService.get();
-    this.materias = this.materiaService.get();
+    this.subtopicService.get().subscribe(s => this.subtopics = s);
+    this.materiaService.get().subscribe(m => this.materias = m);
   }
 
   updateSubjects() {

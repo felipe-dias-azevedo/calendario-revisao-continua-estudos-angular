@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ContextStorageService} from "../context-storage/context-storage.service";
 import {NewSubject, PreSubject, Subject} from "./subject";
 import {v4 as uuid} from "uuid";
+import {defaultIfEmpty, map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,38 +11,54 @@ export class SubjectService {
 
   private key = 'subjects';
 
-  constructor(
-    private contextStorageService: ContextStorageService<PreSubject, Subject>
-  ) { }
+  private contextStorageService: ContextStorageService<PreSubject, Subject>
 
-  get(): Subject[] {
-    return this.contextStorageService.get(this.key)
-      .filter(s => s.id !== undefined && s.parentId !== undefined)
-      .map(s => {
-        return {...s, date: new Date(s.date)}
-      });
+  constructor() {
+    this.contextStorageService = new ContextStorageService<PreSubject, Subject>(this.key);
   }
 
-  getById(id: string): Subject | null {
-    const subject = this.contextStorageService.getById(this.key, id);
-
-    if (subject === null) {
-      return null;
-    }
-
-    return {...subject, date: new Date(subject.date)};
+  get(): Observable<Subject[]> {
+    return this.contextStorageService.get()
+        .pipe(
+            map(s => s.filter(s => s.id !== undefined && s.parentId !== undefined)
+                .map(s => {
+                  return {...s, date: new Date(s.date)}
+                })
+            )
+        );
   }
 
-  getByParentId(parentId: string): Subject[] {
-     return this.contextStorageService.get(this.key)
-       .filter(s => s.parentId === parentId)
-       .map(s => {
-         return {...s, date: new Date(s.date)}
-       });
+  getById(id: string): Observable<Subject | null> {
+    const subject = this.contextStorageService.getById(id);
+
+    return subject.pipe(
+        map(s => {
+          return <Subject>{...s, date: s !== null ? new Date(s.date) : new Date()}
+        }),
+        defaultIfEmpty(null)
+    );
+  }
+
+  getByParentId(parentId: string): Observable<Subject[]> {
+     return this.contextStorageService.get()
+         .pipe(
+             map(s => s.filter(s => s.parentId === parentId)
+                 .map(s => {
+                   return {...s, date: new Date(s.date)}
+                 }))
+         );
+  }
+
+  private getByParentIdSync(parentId: string): Subject[] {
+    return this.contextStorageService.getSync().filter(s => s.parentId === parentId);
   }
 
   add(subject: PreSubject): void {
-    this.contextStorageService.add(this.key, subject);
+    this.contextStorageService.add(subject);
+  }
+
+  addWithId(subject: PreSubject): void {
+    this.contextStorageService.addWithId(subject);
   }
 
   addInDays(subject: NewSubject, days: number[]): string {
@@ -81,34 +98,26 @@ export class SubjectService {
   }
 
   update(id: string, subject: PreSubject): void {
-    this.contextStorageService.update(this.key, id, subject);
+    this.contextStorageService.update(id, subject);
   }
 
   updateByParentId(parentId: string, subject: PreSubject): void {
-    this.get()
-      .filter(s => s.parentId === parentId)
-      .forEach(s => this.contextStorageService.update(this.key, s.id, {
-        ...subject, date: s.date, parentId: s.parentId, notes: s.notes
-      }));
+    const subjects = this.getByParentIdSync(parentId).map(s => {
+      return <Subject>{ ...subject, date: s.date, parentId: s.parentId, notes: s.notes, id: s.id }
+    });
+    this.contextStorageService.updateAll(subjects);
   }
 
   deleteById(id: string): void {
-    this.contextStorageService.deleteById(this.key, id);
+    this.contextStorageService.deleteById(id);
   }
 
   deleteByParentId(parentId: string): void {
-    this.get()
-      .filter(s => s.parentId === parentId)
-      .forEach(s => this.deleteById(s.id));
-  }
-
-  deleteByName(name: string): void {
-    this.get()
-      .filter(s => s.name === name)
-      .forEach(s => this.deleteById(s.id));
+    this.getByParentIdSync(parentId)
+        .forEach(s => this.deleteById(s.id));
   }
 
   deleteAll(): void {
-    this.contextStorageService.deleteAll(this.key);
+    this.contextStorageService.deleteAll();
   }
 }

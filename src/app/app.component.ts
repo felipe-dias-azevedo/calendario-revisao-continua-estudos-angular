@@ -15,6 +15,7 @@ import {ModalAlertComponent} from "./shared/components/modal/alert/modal-alert.c
 import {ModalAlertResponse} from "./shared/components/modal/alert/modal-alert-response";
 import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
 import {ModalAlertTypeContent} from "./shared/components/modal/alert/modal-alert-type-content";
+import {Materia} from "./shared/services/materia/materia";
 
 @Component({
   selector: 'app-root',
@@ -34,6 +35,9 @@ export class AppComponent implements OnInit {
 
   isDev = !environment.production;
 
+  private materias!: Materia[];
+  private subjects!: Subject[];
+
   constructor(
     private dialog: MatDialog,
     private subjectService: SubjectService,
@@ -46,19 +50,35 @@ export class AppComponent implements OnInit {
     this.monthsForward = 0;
     this.textFilter = "";
 
-    this.updateMonth();
+    this.getData();
   }
 
-  private getStudyDayForDay(day: number, month: number, subjects: Subject[]): StudyDay {
-    if (subjects.length == 0) {
+  getData() {
+    this.materiaService.get().subscribe(m => {
+      this.materias = m;
+      if (this.subjects === undefined) {
+          return;
+      }
+      this.updateMonth();
+    });
+    this.subjectService.get().subscribe(s => {
+      this.subjects = s.filter(s => s.name.toLowerCase().includes(this.textFilter.toLowerCase()));
+      if (this.materias === undefined) {
+        return;
+      }
+      this.updateMonth();
+    });
+  }
+
+  private getStudyDayForDay(day: number, month: number): StudyDay {
+    if (this.subjects.length == 0) {
       return { day, content: [] };
     }
 
-    const subjectsForDay = subjects
+    const subjectsForDay = this.subjects
       .filter(s => s.date.isSameDate(new Date(this.now.getFullYear(), month, day)))
-      .filter(s => s.name.toLowerCase().includes(this.textFilter.toLowerCase()))
       .map(s => {
-        const materia = this.materiaService.getById(s.materiaId);
+        const materia = this.materias.find(m => m.id === s.materiaId) ?? null;
         const color = materia === null ? '#000000' : materia.color;
         const studyDay: StudyDayContent = {
           subject: s,
@@ -75,10 +95,9 @@ export class AppComponent implements OnInit {
     this.currentMonth = this.now.getDateOfMonth(this.monthsForward);
 
     let studiesDaysData: StudiesDaysList = [];
-    const subjects = this.subjectService.get();
 
     for (let day = 1; day <= this.now.daysInMonth(actualMonth); day++) {
-      const studyDay = this.getStudyDayForDay(day, actualMonth, subjects);
+      const studyDay = this.getStudyDayForDay(day, actualMonth);
       studiesDaysData = [studyDay, ...studiesDaysData]
     }
 
@@ -89,14 +108,10 @@ export class AppComponent implements OnInit {
     if (window.innerWidth >= 700) {
       return;
     }
-    this.toToday();
+    this.goToToday();
   }
 
   goToToday(): void {
-    this.toToday();
-  }
-
-  private toToday() {
     this.monthsForward = 0;
     this.updateMonth();
 
@@ -130,28 +145,18 @@ export class AppComponent implements OnInit {
     this.updateMonth();
   }
 
-  updateData() {
-    this.updateMonth();
-  }
-
   showRemoveModal() {
-    const modalRemove = this.dialog.open(ModalRemoveComponent, { panelClass: 'modal-container' });
-
-    modalRemove.afterClosed().subscribe(() => this.updateMonth());
+    this.dialog.open(ModalRemoveComponent, { panelClass: 'modal-container' });
   }
 
   showAddModal() {
-    const modalAdd = this.dialog.open(ModalAddComponent, { panelClass: 'modal-container' });
-
-    modalAdd.afterClosed().subscribe(() => this.updateMonth());
+    this.dialog.open(ModalAddComponent, { panelClass: 'modal-container' });
   }
 
   openImportExport() {
-    const modalImportExport = this.dialog.open(ModalImportExportComponent, {
+    this.dialog.open(ModalImportExportComponent, {
       panelClass: 'mini-modal-container'
     });
-
-    modalImportExport.afterClosed().subscribe(() => this.updateMonth());
   }
 
   resetData() {
@@ -169,7 +174,6 @@ export class AppComponent implements OnInit {
       this.subjectService.deleteAll();
       this.subtopicService.deleteAll();
       this.materiaService.deleteAll();
-      this.updateMonth();
     });
   }
 }

@@ -48,13 +48,12 @@ export class ModalRemoveComponent implements OnInit {
   }
 
   private updateData() {
-    this.subtopics = this.subtopicService.get();
-    this.materias = this.materiaService.get();
+    this.subtopicService.get().subscribe(s => this.subtopics = s);
+    this.materiaService.get().subscribe(m => this.materias = m);
   }
 
   changeTabType(event: MatTabChangeEvent) {
     this.tabType = event.index;
-    this.updateData();
   }
 
   deleteSubtopic() {
@@ -63,7 +62,8 @@ export class ModalRemoveComponent implements OnInit {
       return;
     }
 
-    const subtopic = this.subtopicService.getById(this.subtopicId)!;
+    //const subtopic = this.subtopicService.getById(this.subtopicId)!;
+    const subtopic = this.subtopics.find(s => s.id === this.subtopicId)!;
 
     const confirmationDialog = this.dialog.open<ModalAlertComponent, ModalAlertTypeContent, ModalAlertResponse>(ModalAlertComponent, {
       data: {
@@ -81,7 +81,6 @@ export class ModalRemoveComponent implements OnInit {
       this.notifyService.show('Frente deletada com sucesso!');
 
       this.resetValues();
-      this.updateData();
     });
   }
 
@@ -91,7 +90,8 @@ export class ModalRemoveComponent implements OnInit {
       return;
     }
 
-    const materia = this.materiaService.getById(this.materiaId)!;
+    //const materia = this.materiaService.getById(this.materiaId)!;
+    const materia = this.materias.find(s => s.id === this.materiaId)!;
 
     const confirmationDialog = this.dialog.open<ModalAlertComponent, ModalAlertTypeContent, ModalAlertResponse>(ModalAlertComponent, {
       data: {
@@ -109,7 +109,6 @@ export class ModalRemoveComponent implements OnInit {
       this.notifyService.show('Matéria deletada com sucesso!');
 
       this.resetValues();
-      this.updateData();
     });
   }
 

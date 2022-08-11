@@ -18,6 +18,7 @@ import {Materia} from "../../../services/materia/materia";
 import {Subtopic} from "../../../services/subtopic/subtopic";
 import {Subject} from "../../../services/subject/subject";
 import {FileDataBackup} from "../../../models/file-data-backup";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-modal-import-export',
@@ -34,6 +35,10 @@ export class ModalImportExportComponent implements OnInit {
 
   importLoading!: boolean;
 
+  private materias!: Materia[];
+  private subjects!: Subject[];
+  private subtopics!: Subtopic[];
+
   constructor(
     private backupService: BackupService,
     private subjectService: SubjectService,
@@ -45,6 +50,10 @@ export class ModalImportExportComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetData();
+
+    this.materiaService.get().subscribe(v => this.materias = v);
+    this.subtopicService.get().subscribe(v => this.subtopics = v);
+    this.subjectService.get().subscribe(v => this.subjects = v);
   }
 
   private resetData() {
@@ -150,9 +159,9 @@ export class ModalImportExportComponent implements OnInit {
         return;
       }
 
-      result.materias.forEach(m => this.materiaService.add(m));
-      result.subtopics.forEach(s => this.subtopicService.add(s));
-      result.subjects.forEach(s => this.subjectService.add(s));
+      result.materias.forEach(m => this.materiaService.addWithId(m));
+      result.subtopics.forEach(s => this.subtopicService.addWithId(s));
+      result.subjects.forEach(s => this.subjectService.addWithId(s));
 
       this.notifyService.show('Dados importados com sucesso!');
       this.resetData();
@@ -160,11 +169,7 @@ export class ModalImportExportComponent implements OnInit {
   }
 
   downloadData() {
-    const materias = this.materiaService.get();
-    const subtopics = this.subtopicService.get();
-    const subjects = this.subjectService.get();
-
-    const data = this.backupService.generateDownloadFile(materias, subtopics, subjects);
+    const data = this.backupService.generateDownloadFile(this.materias, this.subtopics, this.subjects);
     const fileName = this.backupService.getDownloadFileName();
 
     const content = new Blob([data], { type: 'text/json' });

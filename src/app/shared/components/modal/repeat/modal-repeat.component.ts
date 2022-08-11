@@ -46,29 +46,34 @@ export class ModalRepeatComponent implements OnInit {
   ngOnInit(): void {
     this.anyDayAdded = false;
 
-    this.subjects = this.subjectService.getByParentId(this.data.parentId);
-    const actualSubjects = this.subjects.sort((a, b) => b.date.diffInDays(a.date));
+    this.subjectService.getByParentId(this.data.parentId).subscribe(s => {
+      this.subjects = s;
+      const actualSubjects = this.subjects.sort((a, b) => b.date.diffInDays(a.date));
 
-    this.subjectData = {
-      subject: actualSubjects[0],
-      materia: this.materiaService.getById(actualSubjects[0].materiaId),
-      subtopic: this.subtopicService.getById(actualSubjects[0].subtopicId)
-    }
-    this.firstDate = actualSubjects[0].date;
-
-    const actualSubjectsDays: SubjectDayRepeat[] = actualSubjects.map(s => {
-      return {
-        idSubject: s.id,
-        ammount: this.firstDate.diffInDays(s.date),
-        date: s.date
+      this.subjectData = {
+        subject: actualSubjects[0],
+        materia: null,
+        subtopic: null
       }
-    });
-    this.subjectDates = new MatTableDataSource([...actualSubjectsDays]);
+      this.materiaService.getById(actualSubjects[0].materiaId).subscribe(m => this.subjectData.materia = m);
+      this.subtopicService.getById(actualSubjects[0].subtopicId).subscribe(s => this.subjectData.subtopic = s);
 
-    const days = this.subjectDates.data.map(s => s.ammount);
+      this.firstDate = actualSubjects[0].date;
 
-    this.formNewDaysSubject = this.formBuilder.group({
-      newDayValue: [0, [Validators.required, Validators.min(0), isTilYearEnd, isSubjectDayRepeated(days)]]
+      const actualSubjectsDays: SubjectDayRepeat[] = actualSubjects.map(s => {
+        return {
+          idSubject: s.id,
+          ammount: this.firstDate.diffInDays(s.date),
+          date: s.date
+        }
+      });
+      this.subjectDates = new MatTableDataSource([...actualSubjectsDays]);
+
+      const days = this.subjectDates.data.map(s => s.ammount);
+
+      this.formNewDaysSubject = this.formBuilder.group({
+        newDayValue: [0, [Validators.required, Validators.min(0), isTilYearEnd, isSubjectDayRepeated(days)]]
+      });
     });
   }
 

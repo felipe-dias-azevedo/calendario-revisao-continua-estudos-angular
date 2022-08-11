@@ -48,16 +48,19 @@ export class ModalDetailsSubjectComponent implements OnInit {
   private getData() {
     const subject = this.subjectService.getById(this.data.id);
 
-    if (subject === null) {
-      this.notifyService.show('Não foi possível obter os dados desta disciplina');
-      this.dialogRef.close();
-    }
+     subject.subscribe(s => {
+       if (s === null) {
+         this.notifyService.show('Não foi possível obter os dados desta disciplina');
+         this.dialogRef.close();
+         return;
+       }
 
-    this.subject = subject!;
-    this.materia = this.materiaService.getById(this.subject.materiaId);
-    this.subtopic = this.subtopicService.getById(this.subject.subtopicId);
-    this.subjectComments = subject!.comments?.split('\n');
-    this.subjectNotes = subject!.notes?.split('\n');
+       this.subject = s!
+       this.materiaService.getById(s!.materiaId).subscribe(m => this.materia = m);
+       this.subtopicService.getById(s!.subtopicId).subscribe(s => this.subtopic = s);
+       this.subjectComments = s!.comments?.split('\n');
+       this.subjectNotes = s.notes?.split('\n');
+    });
   }
 
   deleteSubject() {
@@ -102,7 +105,7 @@ export class ModalDetailsSubjectComponent implements OnInit {
   }
 
   updateSubject() {
-    const updateDialog = this.dialog.open(ModalUpdateSubjectComponent, {
+    this.dialog.open(ModalUpdateSubjectComponent, {
       panelClass: 'modal-container',
       data: {
         subject: this.subject,
@@ -110,7 +113,6 @@ export class ModalDetailsSubjectComponent implements OnInit {
         materia: this.materia
       }
     });
-    updateDialog.afterClosed().subscribe(() => this.getData());
   }
 
   repeatSubject() {
@@ -148,8 +150,6 @@ export class ModalDetailsSubjectComponent implements OnInit {
       }
 
       this.subjectService.update(this.subject.id, subject);
-
-      this.getData();
     });
   }
 }

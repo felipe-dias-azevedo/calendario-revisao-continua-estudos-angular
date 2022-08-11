@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {StudiesDaysList, StudyDayContent} from "./studies-day-list";
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {StudiesDaysList} from "./studies-day-list";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalDetailsSubjectComponent} from "../modal/details-subject/modal-details-subject.component";
 import {weekdays} from "../../constants/weekdays";
@@ -15,7 +15,6 @@ export class StudiesDayListComponent implements OnInit {
   @Input() actualDay!: number;
   @Input() monthsForward!: number;
   @Input() subjectPerDayList!: StudiesDaysList;
-  @Output("updateChildren") updateChildren: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private dialog: MatDialog
@@ -25,11 +24,10 @@ export class StudiesDayListComponent implements OnInit {
   }
 
   showDetailsModal(id: string): void {
-    const detailsDialog = this.dialog.open(ModalDetailsSubjectComponent, {
+    this.dialog.open(ModalDetailsSubjectComponent, {
       data: { id },
       panelClass: 'modal-container'
     });
-    detailsDialog.afterClosed().subscribe(() => this.updateChildren.emit());
   }
 
   getWeekday(day: number) {
