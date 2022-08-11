@@ -1,12 +1,15 @@
 {
   "name": "calendario-estudos",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "remote": "ng serve --port 3000 --host 0.0.0.0 --disable-host-check",
-    "build": "ng build",
-    "build-o": "ng build --configuration=production --aot --build-optimizer --base-href /calendario-estudos/",
+    "build": "ng build --configuration=production",
+    "build-dev": "ng build",
+    "ci-local": "ng build --configuration=production --aot --build-optimizer --base-href /calendario-estudos/",
+    "ci-github": "ng build --configuration=production --aot --build-optimizer --base-href https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/",
+    "cd-github": "ngh --dir=dist/calendario-estudos",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
