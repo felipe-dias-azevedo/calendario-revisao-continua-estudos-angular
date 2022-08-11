@@ -1,7 +1,7 @@
 {
-  "name": "calendario-estudos",
+  "name": "Calendario de Revisão de Estudos",
   "short_name": "calendario-estudos",
-  "theme_color": "#1976d2",
+  "theme_color": "#673ab7",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
