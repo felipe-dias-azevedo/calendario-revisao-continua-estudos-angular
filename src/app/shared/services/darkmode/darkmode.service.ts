@@ -12,7 +12,7 @@ export class DarkmodeService {
   private model!: Observable<boolean>;
 
   constructor() {
-    const data = sessionStorage.getItem(this.key);
+    const data = localStorage.getItem(this.key);
     if (data === null) {
       const darkMode = this.getDeviceTheme();
       this.init(darkMode);
@@ -42,12 +42,12 @@ export class DarkmodeService {
   toggle() {
     const value = !this.darkModeState.value;
     this.darkModeState.next(value);
-    sessionStorage.setItem(this.key, '' + value);
+    localStorage.setItem(this.key, '' + value);
   }
 
   reset() {
     const value = this.getDeviceTheme();
     this.darkModeState.next(value);
-    sessionStorage.removeItem(this.key);
+    localStorage.removeItem(this.key);
   }
 }

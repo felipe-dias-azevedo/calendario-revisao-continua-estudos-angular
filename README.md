@@ -30,7 +30,7 @@ Este projeto foi reescrito do zero para o Angular 14 a partir do seu código fon
 - [x] Exportar dados
 - [ ] Autocomplete on remove modal
 - [ ] Busca aprimorada para mobile
-- [ ] Dark theme/mode
+- [x] Dark theme/mode
 - [ ] menu de configurações (opções default de repetições, dark mode, etc)
 - [ ] Visualização em formato de calendário
 - [ ] Testes unitários com Karma + Jasmine
