@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1658786668026,
+  "timestamp": 1660341953427,
   "index": "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/favicon.ico",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/index.html",
-        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/main.c926a0987e907a78.js",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/main.5d29a99183356444.js",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/manifest.webmanifest",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/polyfills.e570706f73401248.js",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/runtime.807b5b746a2e321a.js",
-        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/styles.1f8714cdf03438e4.css"
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/styles.80dda8499d2965f6.css"
       ],
       "patterns": [
         "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
@@ -32,13 +32,24 @@
         "ignoreVary": true
       },
       "urls": [
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/apple-touch-icon.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-120x120.png",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-128x128.png",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-144x144.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-150x150.png",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-152x152.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-167x167.png",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-192x192.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-310x150.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-310x310.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-36x36.png",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-384x384.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-48x48.png",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-512x512.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-60x60.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-70x70.png",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-72x72.png",
+        "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-76x76.png",
         "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-96x96.png"
       ],
       "patterns": []
@@ -46,21 +57,32 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/index.html": "79b34f91c7a09ff73157c1050fdfb8df94d5a339",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/main.c926a0987e907a78.js": "37c23bd398954fd456200c98dc9df168b50d720e",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/manifest.webmanifest": "7cefb16f83dffcd709e1aef04a27ca1ec3050ce7",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/apple-touch-icon.png": "b54e62037318389903b417bb63bc68e0102d008d",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-120x120.png": "d0b325b5974a855c5828cfd9025f569b076748f5",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-128x128.png": "ac5f118dcefaee840fd5cd7c7bfac15b4221ed8c",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-144x144.png": "55eccf5550177993c62a83f0639a9c6e908815e1",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-150x150.png": "1b51d956e2b703a4e489c7c480be009a7002b34b",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-152x152.png": "bc4f3917b8dcf89e231eb1b012ba8fa6cc61efad",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-167x167.png": "a8cef65c95e049efb64a81a3176ed1b0d3f42018",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-192x192.png": "00e742ede228169ad2d8f13e283ec8f11abb06ea",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-310x150.png": "f6df88fc3e7a64ebd79009db85147704177e4cfd",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-310x310.png": "d754b9ae78980d691267d3573686bf845b16b80e",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-36x36.png": "f67bd410e0fae9dcdce20f79fe9549a7c521946a",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-384x384.png": "a943941afde23d18d66953608e914a22e682f61f",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-48x48.png": "76ccf6458efd89d4f2f562a60897392f05d49ea7",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-512x512.png": "075e61e771121355cbebf1ac0525e6d79e2ed85d",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-60x60.png": "7503d22149f8c1b7c3a095abab543ba79f80d319",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-70x70.png": "050c6e2df934f52cace1177757cee34b61f7cff9",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-72x72.png": "3e8998de3cf887130e08dcb1aa37649a7e7131e7",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-76x76.png": "b5f8ffa16e6605b927ba9dc8299e142850f9ea65",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/assets/icons/icon-96x96.png": "73101c64df90655f70aae9a9e808b2afdcafe89b",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/favicon.ico": "bd7f29197636e19e910720f4deeff1cfcb62bfc1",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/index.html": "a35832bbb4bfc757929617a2e7ab5c39d2703a32",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/main.5d29a99183356444.js": "26f19d5d4507bff325ac239e1898ac37c23ef854",
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/manifest.webmanifest": "129721daadb187ed3f9c3bd752acfe16f33207ec",
     "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/polyfills.e570706f73401248.js": "25cfa1e9d4df1593376793788656d807292c0337",
     "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/runtime.807b5b746a2e321a.js": "ed68b1af01f1dab18576ad168deb908599952844",
-    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/styles.1f8714cdf03438e4.css": "662fa3543db82df4e0ac7f2dd942cf322e9cec3a"
+    "https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/styles.80dda8499d2965f6.css": "fae2b61fd44621046b80fd630003ba5eb438b5a2"
   },
   "navigationUrls": [
     {
