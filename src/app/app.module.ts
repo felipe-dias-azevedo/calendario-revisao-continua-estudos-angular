@@ -37,6 +37,7 @@ import { ModalRepeatAddComponent } from './shared/components/modal/repeat-add/mo
 import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
 import { ModalImportTableComponent } from './shared/components/modal/import-table/modal-import-table.component';
 import { ModalNoteSubjectComponent } from './shared/components/modal/note-subject/modal-note-subject.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 registerLocaleData(localePT);
 
@@ -83,7 +84,8 @@ registerLocaleData(localePT);
         MatMenuModule,
         MatCardModule,
         MatTableModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatSlideToggleModule
     ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

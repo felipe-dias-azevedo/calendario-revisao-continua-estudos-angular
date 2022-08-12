@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import {SubtopicService} from "./shared/services/subtopic/subtopic.service";
 import {SubjectService} from "./shared/services/subject/subject.service";
 import {MateriaService} from "./shared/services/materia/materia.service";
@@ -16,6 +16,8 @@ import {ModalAlertResponse} from "./shared/components/modal/alert/modal-alert-re
 import { ModalImportExportComponent } from './shared/components/modal/import-export/modal-import-export.component';
 import {ModalAlertTypeContent} from "./shared/components/modal/alert/modal-alert-type-content";
 import {Materia} from "./shared/services/materia/materia";
+import {DarkmodeService} from "./shared/services/darkmode/darkmode.service";
+import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-root',
@@ -38,11 +40,17 @@ export class AppComponent implements OnInit {
   private materias!: Materia[];
   private subjects!: Subject[];
 
+  @HostBinding('class') className = '';
+
+  isDarkOn: boolean = false;
+
   constructor(
     private dialog: MatDialog,
+    private overlay: OverlayContainer,
     private subjectService: SubjectService,
     private subtopicService: SubtopicService,
-    private materiaService: MateriaService
+    private materiaService: MateriaService,
+    private darkmodeService: DarkmodeService
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +58,21 @@ export class AppComponent implements OnInit {
     this.monthsForward = 0;
     this.textFilter = "";
 
+    this.setDarkMode();
     this.getData();
+  }
+
+  private setDarkMode() {
+    this.darkmodeService.get().subscribe((darkMode) => {
+      const darkClassName = 'darkMode';
+      this.className = darkMode ? darkClassName : '';
+      this.isDarkOn = darkMode;
+      if (darkMode) {
+        this.overlay.getContainerElement().classList.add(darkClassName);
+      } else {
+        this.overlay.getContainerElement().classList.remove(darkClassName);
+      }
+    });
   }
 
   getData() {
@@ -102,6 +124,10 @@ export class AppComponent implements OnInit {
     }
 
     this.subjectPerDayList = studiesDaysData.sort((a, b) => +a.day - +b.day);
+  }
+
+  toggleDarkMode() {
+    this.darkmodeService.toggle();
   }
 
   goToTodayTitle(): void {

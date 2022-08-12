@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prod": "ng serve --configuration=production",
     "remote": "ng serve --port 3000 --host 0.0.0.0 --disable-host-check",
     "build": "ng build --configuration=production",
     "build-dev": "ng build",

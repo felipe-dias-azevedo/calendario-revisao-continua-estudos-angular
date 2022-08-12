@@ -77,7 +77,7 @@ input[type="color"]::-webkit-color-swatch {
   min-width: 60%;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1060px) {
   .modal-container {
     height: 98%;
     min-width: 95%;
@@ -86,6 +86,10 @@ input[type="color"]::-webkit-color-swatch {
   .mini-modal-container {
     height: 98%;
     min-width: 95%;
+  }
+
+  #search-toolbar {
+    display: none;
   }
 }
 

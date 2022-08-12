@@ -63,8 +63,8 @@
 
           <mat-form-field class="normalize-font input-container" appearance="outline" (click)="picker.open()" color="primary" hideRequiredMarker>
             <mat-label>Data de Início</mat-label>
-            <input matInput [matDatepicker]="picker" class="force-color" formControlName="dataInicio" [disabled]="true">
-            <mat-datepicker-toggle matSuffix [for]="picker" class="force-color"></mat-datepicker-toggle>
+            <input matInput [matDatepicker]="picker" class="primary-color" formControlName="dataInicio" [disabled]="true">
+            <mat-datepicker-toggle matSuffix [for]="picker" class="primary-color"></mat-datepicker-toggle>
             <mat-datepicker touchUi [disabled]="false" #picker></mat-datepicker>
             <mat-error *ngIf="formSubject.invalid">Este campo é obrigatório.</mat-error>
           </mat-form-field>
@@ -81,7 +81,7 @@
             <mat-hint>Esta observação estará presente para todas as repetições</mat-hint>
           </mat-form-field>
 
-          <mat-card class="mat-elevation-z0 repeat-margin outline">
+          <mat-card class="mat-elevation-z0 repeat-margin constrast-mat-outline">
             <mat-card-subtitle>
               Repetições
             </mat-card-subtitle>

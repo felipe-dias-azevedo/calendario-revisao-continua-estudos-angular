@@ -20,7 +20,7 @@
     opacity: 0.6;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1060px) {
     .repeat-subtitle-upper {
         margin-right: 2rem;
     }

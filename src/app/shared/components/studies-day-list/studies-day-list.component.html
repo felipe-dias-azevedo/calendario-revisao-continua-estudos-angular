@@ -1,8 +1,8 @@
-<main id="studies-day-list">
+<main id="studies-day-list" class="mat-app-background">
   <div
     *ngFor="let studyDay of subjectPerDayList"
     id="dia-{{ studyDay.day }}"
-    class="study-day {{ isTodayStudyDay(studyDay.day) ? 'today-study-day' : '' }}"
+    class="study-day contrast-background {{ isTodayStudyDay(studyDay.day) ? 'contrast-border' : '' }}"
   >
     <div class="day-study-day">
       <h3>{{ studyDay.day }}</h3>

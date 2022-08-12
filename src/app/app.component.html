@@ -41,6 +41,16 @@
         <mat-icon>cached</mat-icon>
       </button>
     </ng-container>
+
+    <mat-icon class="mr-1">brightness_5</mat-icon>
+    <mat-slide-toggle
+      [checked]="isDarkOn"
+      (change)="toggleDarkMode()"
+      class="mr-1"
+      matTooltip="Habilitar/Desabilitar Modo Escuro"
+    ></mat-slide-toggle>
+    <mat-icon class="mr-1">bedtime</mat-icon>
+
     <button
       mat-icon-button
       class="add-subject"
@@ -65,7 +75,7 @@
     >
       <mat-icon>add</mat-icon>
     </button>
-    <mat-form-field class="normalize-font">
+    <mat-form-field id="search-toolbar" class="normalize-font">
       <mat-label>Pesquisa</mat-label>
       <input
         matInput
@@ -76,6 +86,7 @@
     </mat-form-field>
   </div>
 </mat-toolbar>
+
 <app-studies-day-list
   [actualDay]="now.getDate()"
   [monthsForward]="monthsForward"

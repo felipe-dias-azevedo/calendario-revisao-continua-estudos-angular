@@ -3,7 +3,7 @@
     align-items: flex-end;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1060px) {
     .modal-header {
         align-items: flex-start;
     }
