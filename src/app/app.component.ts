@@ -25,9 +25,7 @@ import {OverlayContainer} from "@angular/cdk/overlay";
   styleUrls: ['./app.component.css', './responsive.css']
 })
 export class AppComponent implements OnInit {
-
-  title = 'calendario-estudos';
-
+  
   now!: Date;
   monthsForward!: number;
 

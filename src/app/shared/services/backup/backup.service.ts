@@ -120,6 +120,6 @@ export class BackupService {
   getDownloadFileName(): string {
     const now = new Date();
     const date = now.toISOString().split('T')[0];
-    return `dados-calendario-revisao-estudos-v2-${date}.json`;
+    return `studscal-data-${date}.json`;
   }
 }

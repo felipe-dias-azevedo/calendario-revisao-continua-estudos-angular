@@ -1,5 +1,5 @@
 {
-  "name": "calendario-estudos",
+  "name": "studscal",
   "version": "1.2.0",
   "scripts": {
     "ng": "ng",
@@ -8,9 +8,9 @@
     "remote": "ng serve --port 3000 --host 0.0.0.0 --disable-host-check",
     "build": "ng build --configuration=production",
     "build-dev": "ng build",
-    "ci-local": "ng build --configuration=production --aot --build-optimizer --base-href /calendario-estudos/",
-    "ci-github": "ng build --configuration=production --aot --build-optimizer --base-href https://felipe-dias-azevedo.github.io/calendario-revisao-continua-estudos-angular/",
-    "cd-github": "ngh --dir=dist/calendario-estudos",
+    "ci-local": "ng build --configuration=production --aot --build-optimizer --base-href /studscal/",
+    "ci-github": "ng build --configuration=production --aot --build-optimizer --base-href https://felipe-dias-azevedo.github.io/studscal/",
+    "cd-github": "ngh --dir=dist/studscal",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
