@@ -1,6 +1,6 @@
 {
-  "name": "Calendario de Revisão de Estudos",
-  "short_name": "calendario-estudos",
+  "name": "StudsCal",
+  "short_name": "studscal",
   "theme_color": "#00bcd4",
   "background_color": "#fafafa",
   "display": "standalone",
